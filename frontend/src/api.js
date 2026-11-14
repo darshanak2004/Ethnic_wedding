@@ -1,7 +1,7 @@
 import { DEFAULTS } from "./data/defaults";
 
 export const API = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
-export const WA = import.meta.env.VITE_WA_NUMBER || "";
+export const WA = import.meta.env.VITE_WA_NUMBER || "919876543210";
 
 export const token = {
   get: () => sessionStorage.getItem("ew_admin") || "",
