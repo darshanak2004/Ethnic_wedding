@@ -31,7 +31,37 @@ app.get("/api/health", (req, res) => {
 });
 
 let ready = false;
-app.use("/api", (_req, res, next) => (ready ? next() : res.status(503).json({ error: "Starting up, try again in a moment" })));
+let initPromise = null;
+
+async function ensureReady() {
+  if (ready) return true;
+  if (!initPromise) {
+    initPromise = (async () => {
+      for (let i = 1; i <= 6; i++) {
+        try {
+          await migrate();
+          ready = true;
+          initWhatsApp();
+          return true;
+        } catch (e) {
+          console.error(`[db] startup attempt ${i} failed:`, e.message);
+          if (i < 6) await new Promise((r) => setTimeout(r, 1500 * i));
+        }
+      }
+      return false;
+    })();
+  }
+  return initPromise;
+}
+
+// Warmup on launch
+ensureReady();
+
+app.use("/api", async (_req, res, next) => {
+  if (!ready) await ensureReady();
+  if (!ready) return res.status(503).json({ error: "Starting up, try again in a moment" });
+  next();
+});
 app.use("/api", api);
 app.use((_req, res) => res.status(404).json({ error: "Not found" }));
 app.use((err, _req, res, _next) => {
@@ -40,15 +70,10 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ error: "Something went wrong" });
 });
 
-app.listen(env.PORT, () => console.log(`API listening on :${env.PORT}`));
-
-(async () => {
-  for (let i = 1; i <= 6; i++) {
-    try { await migrate(); ready = true; initWhatsApp(); return; }
-    catch (e) { console.error(`[db] startup attempt ${i} failed:`, e.message); await new Promise((r) => setTimeout(r, 3000 * i)); }
-  }
-  console.error("[db] could not reach the database, exiting");
-  process.exit(1);
-})();
+if (process.env.NODE_ENV !== "test" && !process.env.VERCEL) {
+  app.listen(env.PORT, () => console.log(`API listening on :${env.PORT}`));
+}
 
 process.on("unhandledRejection", (e) => console.error("[unhandledRejection]", e));
+
+export default app;

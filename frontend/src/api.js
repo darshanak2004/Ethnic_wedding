@@ -48,7 +48,6 @@ export function cachedContent() {
 
 /** Returns live content from the server, or null if the server is asleep or unreachable. */
 export async function getContent() {
-  if (!API) return DEFAULTS;
   try {
     const c = await call("/content", { timeout: 60000 }); // a sleeping free host can take ~50s to wake
     try { localStorage.setItem(CACHE, JSON.stringify(c)); } catch {}
@@ -59,7 +58,6 @@ export async function getContent() {
 /* ---------- admin ---------- */
 
 export async function login(password) {
-  if (!API) return "demo"; // demo mode: any password works
   return (await call("/admin/login", { method: "POST", body: { password } })).token;
 }
 
@@ -80,7 +78,6 @@ async function shrink(file) {
 
 /** Uploads straight to Cloudinary using a signature from our server. Returns { url, publicId }. */
 export async function uploadFile(file) {
-  if (!API) return { url: URL.createObjectURL(file), publicId: "" }; // demo preview only
   const kind = file.type.startsWith("video") ? "video" : "image";
   if (kind === "video" && file.size > 100 * 1024 * 1024) throw new Error("Video is over 100 MB. Please compress it first.");
   const f = kind === "image" ? await shrink(file) : file;
@@ -98,18 +95,15 @@ export async function uploadFile(file) {
 }
 
 export async function saveImage(section, { url, publicId }, alt) {
-  if (!API) return { id: crypto.randomUUID(), url, alt };
   return call("/admin/images", { method: "POST", auth: true, body: { section, url, publicId, alt } });
 }
-export const removeImage = (id) => (API ? call(`/admin/images/${id}`, { method: "DELETE", auth: true }) : null);
-export const saveHeroVideo = (up) => (API ? call("/admin/hero", { method: "PUT", auth: true, body: { videoUrl: up?.url || "", publicId: up?.publicId || "" } }) : null);
+export const removeImage = (id) => call(`/admin/images/${id}`, { method: "DELETE", auth: true });
+export const saveHeroVideo = (up) => call("/admin/hero", { method: "PUT", auth: true, body: { videoUrl: up?.url || "", publicId: up?.publicId || "" } });
 
 export async function addEvent(title) {
-  const slug = title.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
-  if (!API) return { slug, title, images: [] };
   return call("/admin/events", { method: "POST", auth: true, body: { title } });
 }
-export const deleteEvent = (slug) => (API ? call(`/admin/events/${slug}`, { method: "DELETE", auth: true }) : null);
+export const deleteEvent = (slug) => call(`/admin/events/${slug}`, { method: "DELETE", auth: true });
 
 export const getEnquiries = () => call("/admin/enquiries", { auth: true });
 export const resendEnquiry = (id) => call(`/admin/enquiries/${id}/resend`, { method: "POST", auth: true });

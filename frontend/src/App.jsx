@@ -14,8 +14,8 @@ export default function App() {
   // Show the site immediately (last saved content or the built-in starter photos),
   // then swap in the live content. A sleeping free server never leaves visitors on a blank page.
   const [content, setContent] = useState(cachedContent);
-  const [live, setLive] = useState(!API);
-  useEffect(() => { getContent().then((c) => { if (c) { setContent(c); setLive(true); } }); }, []);
+  const [live, setLive] = useState(true);
+  useEffect(() => { getContent().then((c) => { if (c) setContent(c); }); }, []);
   return (
     <Routes>
       <Route path="/" element={<Home content={content} />} />
