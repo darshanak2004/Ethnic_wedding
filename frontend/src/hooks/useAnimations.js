@@ -33,6 +33,7 @@ export default function useAnimations() {
         const im = el.querySelector("img"); if (im) gsap.from(im, { scale: 1.2, duration: 1.6, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
       });
       $$(".num").forEach((el) => {
+        if (!el.dataset.n || isNaN(+el.dataset.n)) return;
         const n = +el.dataset.n, s = el.dataset.s || "", o = { v: 0 };
         ScrollTrigger.create({ trigger: el, start: "top 92%", once: true, onEnter: () => gsap.to(o, { v: n, duration: 1.8, ease: "power2.out", onUpdate: () => (el.textContent = Math.round(o.v) + s) }) });
       });

@@ -58,17 +58,17 @@ export default function About() {
         <SecHead center kick="Our Growth" ta="எங்கள் வளர்ச்சி" title="Every Milestone Tells Our Story" text="Our journey is built on passion, creativity, and the trust of families who invite us to capture their most precious celebrations. Every wedding has helped us grow and create memories that last forever." />
         <div className="grid g3 stg" style={{ marginTop: 32 }}>
           <article className="card" style={{ textAlign: "center" }}>
-            <b className="num" style={{ fontSize: "2.4rem", color: "var(--gold)", display: "block", marginBottom: 8 }}>2026</b>
+            <b className="num" data-n="2026" data-s="" style={{ fontSize: "2.4rem", color: "var(--gold)", display: "block", marginBottom: 8 }}>2026</b>
             <h3 style={{ marginBottom: 8 }}>Where Our Journey Began</h3>
             <p>Started with a passion for capturing beautiful wedding moments and preserving family memories.</p>
           </article>
           <article className="card" style={{ textAlign: "center" }}>
-            <b className="num" style={{ fontSize: "2.4rem", color: "var(--gold)", display: "block", marginBottom: 8 }}>100+</b>
+            <b className="num" data-n="100" data-s="+" style={{ fontSize: "2.4rem", color: "var(--gold)", display: "block", marginBottom: 8 }}>100+</b>
             <h3 style={{ marginBottom: 8 }}>Happy Families & Celebrations</h3>
             <p>Thousands of beautiful celebrations captured with love, care, and dedication.</p>
           </article>
           <article className="card" style={{ textAlign: "center" }}>
-            <b className="num" style={{ fontSize: "2.4rem", color: "var(--gold)", display: "block", marginBottom: 8 }}>100+</b>
+            <b className="num" data-n="100" data-s="+" style={{ fontSize: "2.4rem", color: "var(--gold)", display: "block", marginBottom: 8 }}>100+</b>
             <h3 style={{ marginBottom: 8 }}>Creative Professionals</h3>
             <p>A dedicated team working together to deliver beautiful wedding photography and cinematic films.</p>
           </article>
