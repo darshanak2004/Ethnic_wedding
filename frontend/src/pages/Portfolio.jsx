@@ -1,6 +1,7 @@
 import Layout from "../components/Layout";
 import Gallery from "../components/Gallery";
 import { PageHead, Cta } from "../components/Bits";
+import { DEFAULTS } from "../data/defaults";
 
 export default function Portfolio({ content }) {
   return (
@@ -11,7 +12,7 @@ export default function Portfolio({ content }) {
         title="Our work"
         text="Have a look at our latest wedding, pre-wedding, engagement, and celebration galleries."
       />
-      <Gallery events={content.events} />
+      <Gallery events={content?.events || DEFAULTS.events} />
       <Cta
         title={<>Like what you have <em>seen?</em></>}
         text="Dates get booked up quickly. Tell us your dates and we will confirm availability via WhatsApp within 24 to 48 hours."

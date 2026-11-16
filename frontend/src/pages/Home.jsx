@@ -4,6 +4,7 @@ import Layout from "../components/Layout";
 import Hero from "../components/Hero";
 import { SecHead, Cta, QUOTES } from "../components/Bits";
 import { PRIMARY, SERVICES } from "../data/services";
+import { DEFAULTS } from "../data/defaults";
 import { cdn } from "../api";
 
 const HOW_IT_WORKS = [
@@ -105,7 +106,7 @@ export default function Home({ content }) {
       {/* Portfolio Section */}
       <section className="sec alt"><div className="wrap">
         <SecHead center kick="Our Portfolio" ta="எங்கள் படைப்புகள்" title="Every Picture Tells a Beautiful Story" text="Real Moments. Beautiful Stories. Timeless Memories." />
-        <div className="grid g4 stg">{content.events.map((e) => (
+        <div className="grid g4 stg">{(content?.events || DEFAULTS.events).map((e) => (
           <Link to={`/portfolio?folder=${e.slug}`} className="folder-card ev" key={e.slug}>
             <div className="folder-tab">
               <span className="folder-icon">📁</span>

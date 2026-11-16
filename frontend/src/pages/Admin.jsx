@@ -211,7 +211,7 @@ export default function Admin({ content, setContent, live }) {
     try { await deleteEvent(ev.slug); setContent((c) => persist({ ...c, events: c.events.filter((e) => e.slug !== ev.slug) })); setTab("home"); } catch (x) { fail(x); }
   };
 
-  const ev = content.events.find((e) => e.slug === tab);
+  const ev = (content?.events || []).find((e) => e.slug === tab);
 
   return (
     <div className="adm">
@@ -219,7 +219,7 @@ export default function Admin({ content, setContent, live }) {
         <img src="/assets/word-cream.png" alt="Ethnic Weddings" />
         <button className={tab === "home" ? "on" : ""} onClick={() => setTab("home")}>Homepage</button>
         <small>Portfolio events</small>
-        {content.events.map((e) => (
+        {(content?.events || []).map((e) => (
           <button key={e.slug} className={tab === e.slug ? "on" : ""} onClick={() => setTab(e.slug)}>{e.title}</button>
         ))}
         <form onSubmit={makeEvent}>
@@ -238,16 +238,16 @@ export default function Admin({ content, setContent, live }) {
             <h2>Homepage</h2>
             <h3>Hero video</h3>
             <p className="hint">Keep it under 30 seconds and about 20-30 MB. It plays muted on a loop.</p>
-            {content.hero.videoUrl && <video src={cdn(content.hero.videoUrl)} muted controls style={{ maxWidth: 420, borderRadius: 16 }} />}
+            {content?.hero?.videoUrl && <video src={cdn(content.hero.videoUrl)} muted controls style={{ maxWidth: 420, borderRadius: 16 }} />}
             <div className="arow">
               <label className="btn wine">
-                {busy ? label || "Uploading…" : content.hero.videoUrl ? "Replace video" : "Upload video"}
+                {busy ? label || "Uploading…" : content?.hero?.videoUrl ? "Replace video" : "Upload video"}
                 <input type="file" accept="video/*" hidden disabled={busy} onChange={(e) => { e.target.files[0] && setVideo(e.target.files[0]); e.target.value = ""; }} />
               </label>
-              {content.hero.videoUrl && <button className="btn line" onClick={clearVideo}>Remove video</button>}
+              {content?.hero?.videoUrl && <button className="btn line" onClick={clearVideo}>Remove video</button>}
             </div>
             <h3>Hero photos (shown when no video is set)</h3>
-            <Grid images={content.hero.slides} section="hero" busy={busy} label={label} onAdd={addTo} onDel={del} />
+            <Grid images={content?.hero?.slides || []} section="hero" busy={busy} label={label} onAdd={addTo} onDel={del} />
           </>
         ) : tab === "__enq" ? <Enquiries fail={fail} />
           : tab === "__wa" ? <WhatsApp fail={fail} />

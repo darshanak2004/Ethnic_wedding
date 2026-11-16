@@ -30,6 +30,10 @@ async function call(path, { method = "GET", body, auth = false, timeout = 20000 
       headers: { ...(body ? { "Content-Type": "application/json" } : {}), ...(auth ? { Authorization: `Bearer ${token.get()}` } : {}) },
       body: body ? JSON.stringify(body) : undefined,
     });
+    const ctype = r.headers.get("content-type") || "";
+    if (!ctype.includes("application/json")) {
+      throw new ApiError("Non-JSON response received from server", r.status);
+    }
     const data = await r.json().catch(() => ({}));
     if (!r.ok) throw new ApiError(data.error || "Something went wrong", r.status);
     return data;
@@ -43,15 +47,28 @@ async function call(path, { method = "GET", body, auth = false, timeout = 20000 
 
 const CACHE = "ew_content_v2";
 export function cachedContent() {
-  try { return JSON.parse(localStorage.getItem(CACHE)) || DEFAULTS; } catch { return DEFAULTS; }
+  try {
+    const raw = localStorage.getItem(CACHE);
+    if (!raw) return DEFAULTS;
+    const parsed = JSON.parse(raw);
+    if (parsed && Array.isArray(parsed.events) && parsed.events.length > 0) {
+      return parsed;
+    }
+    return DEFAULTS;
+  } catch {
+    return DEFAULTS;
+  }
 }
 
 /** Returns live content from the server, or null if the server is asleep or unreachable. */
 export async function getContent() {
   try {
     const c = await call("/content", { timeout: 60000 }); // a sleeping free host can take ~50s to wake
-    try { localStorage.setItem(CACHE, JSON.stringify(c)); } catch {}
-    return c;
+    if (c && Array.isArray(c.events) && c.events.length > 0) {
+      try { localStorage.setItem(CACHE, JSON.stringify(c)); } catch {}
+      return c;
+    }
+    return null;
   } catch { return null; }
 }
 
