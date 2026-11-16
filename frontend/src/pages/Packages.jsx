@@ -6,10 +6,21 @@ import { PACKAGES } from "../data/services";
 export default function Packages() {
   return (
     <Layout>
-      <PageHead crumb="Packages" ta="தொகுப்புகள்" title="Our packages" text="Each package bundles our services. Tell us your date and venue and we will send a quote." />
+      <PageHead
+        crumb="Packages"
+        ta="தொகுப்புகள்"
+        title="The Perfect Package for Your Special Day"
+        text="Make your wedding memories unforgettable with our thoughtfully designed photography and cinematography packages. Choose the perfect bundle to capture every beautiful moment of your celebration."
+      />
 
       <section className="sec"><div className="wrap">
-        <SecHead center kick="Packages" ta="தொகுப்புகள்" title="Choose what fits your day" />
+        <SecHead
+          center
+          kick="Wedding Packages"
+          ta="தொகுப்புகள்"
+          title="The Perfect Package for Your Special Day"
+          text="Make your wedding memories unforgettable with our thoughtfully designed photography and cinematography packages. Choose the perfect bundle to capture every beautiful moment of your celebration."
+        />
         <div className="grid g3 stg pkgs">{PACKAGES.map((p) => (
           <article className={`pk${p.featured ? " feat" : ""}`} key={p.name}>
             <span className="ta">{p.ta}</span>

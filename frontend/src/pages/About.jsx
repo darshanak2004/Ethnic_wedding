@@ -1,8 +1,18 @@
 import Layout from "../components/Layout";
 import { SecHead, PageHead, Cta } from "../components/Bits";
 
-const VAL = [["Family first", "Weddings here belong to whole families. We photograph every elder and cousin because they are who the album is for.", "◈"], ["Respect for ritual", "We learn the order of your ceremonies so we are in the right place without interrupting anyone.", "✦"], ["Honest pictures", "Real moments over staged ones. Fewer, better frames you will still love in fifty years.", "❖"], ["Photo and film together", "One team shoots both, so the story and the look stay consistent.", "▶"]];
-const TR = [["இந்து திருமணம்", "Hindu weddings", "Muhurtham, kasi yatra, oonjal, thali and saptapadi, covered in sequence."], ["கிறிஸ்தவ திருமணம்", "Christian weddings", "Church ceremony, vows, ring exchange and reception, with respect for the service."], ["முஸ்லிம் திருமணம்", "Muslim weddings", "Nikah, mehndi and walima, photographed with sensitivity and care."]];
+const VAL = [
+  ["Family First", "Every family member matters. We capture the smiles, emotions, and togetherness that make your wedding special.", "◈"],
+  ["Respect for Traditions", "We understand your wedding rituals and capture every important moment with care and respect.", "✦"],
+  ["Natural Photography", "We focus on genuine emotions and candid moments rather than artificial poses.", "❖"],
+  ["Photography & Films Together", "One dedicated team for wedding photography and cinematic films, ensuring a beautiful and consistent story.", "▶"]
+];
+
+const TR = [
+  ["இந்து திருமணம்", "Hindu Wedding Photography", "Capturing beautiful moments from Muhurtham, Kasi Yatra, Oonjal, Thali, and Saptapadi ceremonies."],
+  ["கிறிஸ்தவ திருமணம்", "Christian Wedding Photography", "Beautiful coverage of church ceremonies, wedding vows, ring exchanges, and grand receptions."],
+  ["முஸ்லிம் திருமணம்", "Muslim Wedding Photography", "Capturing Nikah, Mehndi, Walima, and meaningful family celebrations with care and respect."]
+];
 
 export default function About() {
   return (
@@ -10,8 +20,8 @@ export default function About() {
       <PageHead
         crumb="About"
         ta="எங்களைப் பற்றி"
-        title="Every Wedding Has a Story. We Capture It Beautifully."
-        text="At Ethnic Weddings, we turn your special wedding moments into timeless memories. Based in Thoothukudi, we specialize in candid wedding photography, traditional portraits, and cinematic wedding films for Hindu, Christian, and Muslim weddings across Tamil Nadu."
+        title="The Team Behind Your Beautiful Memories"
+        text="A passionate wedding photography team from Thoothukudi, capturing beautiful celebrations, real emotions, and unforgettable moments across Tamil Nadu."
       />
 
       <section className="sec"><div className="wrap two">
@@ -20,10 +30,10 @@ export default function About() {
           <div className="mini"><img src="/assets/portfolio/pre-wedding/ses_6102.jpg" alt="Outdoor couple" loading="lazy" /></div>
         </div>
         <div>
-          <SecHead kick="About Us" title={<>We Capture Every Emotion, Tradition & <em>Celebration</em></>} />
+          <SecHead kick="Our Story" title={<>Every Wedding Has a Story. <em>We Make It Last Forever.</em></>} />
           <div className="stack rv">
-            <p>At Ethnic Weddings, we turn your special wedding moments into timeless memories. Based in Thoothukudi, we specialize in candid wedding photography, traditional portraits, and cinematic wedding films for Hindu, Christian, and Muslim weddings.</p>
-            <p>We capture every emotion, tradition, and celebration with creativity and care. From traditional wedding portraits to candid moments, we turn your precious memories into timeless stories that you and your family will cherish forever.</p>
+            <p>At Ethnic Weddings, our journey began with a passion for capturing beautiful wedding moments. What started with photographing friends' weddings has grown into a love for telling meaningful stories through photography and films.</p>
+            <p>We believe in capturing real emotions, family traditions, and special moments naturally, creating memories that last a lifetime.</p>
           </div>
           <ul className="ticks rv" style={{ marginTop: 16 }}>
             <li>We understand your wedding traditions and rituals.</li>
@@ -35,21 +45,35 @@ export default function About() {
       </div></section>
 
       <section className="sec alt"><div className="wrap">
-        <SecHead center kick="What we value" ta="எங்கள் மதிப்புகள்" title="How we work" />
+        <SecHead center kick="What We Value" ta="எங்கள் அணுகுமுறை" title="Our Approach to Every Wedding" />
         <div className="grid g4 stg">{VAL.map((v) => <article className="card" key={v[0]}><div className="ico">{v[2]}</div><h3>{v[0]}</h3><p>{v[1]}</p></article>)}</div>
       </div></section>
 
       <section className="sec"><div className="wrap">
-        <SecHead center kick="Traditions we cover" ta="அனைத்து மரபுகளும்" title="Every wedding, in its own way" />
+        <SecHead center kick="Wedding Traditions We Cover" ta="அனைத்து மரபுகளும்" title="Celebrating Every Tradition with Love and Respect" text="Every culture has its own beauty. We capture each wedding tradition with creativity, care, and attention to detail." />
         <div className="grid g3 stg">{TR.map((t) => <article className="card" key={t[1]}><span className="ta">{t[0]}</span><h3>{t[1]}</h3><p>{t[2]}</p></article>)}</div>
       </div></section>
 
-      <section className="sec alt"><div className="wrap"><div className="stats stg" style={{ marginTop: 0 }}>
-        <div className="st"><b className="num" data-n="100" data-s="+">100+</b><span>Happy Couples & Customers</span></div>
-        <div className="st"><b className="num" data-n="3" data-s="">3</b><span>Wedding Traditions</span></div>
-        <div className="st"><b className="num" data-n="9" data-s="">9</b><span>Photography & Film Services</span></div>
-        <div className="st"><b className="num" data-n="38" data-s="">38</b><span>Services & TN Districts</span></div>
-      </div></div></section>
+      <section className="sec alt"><div className="wrap">
+        <SecHead center kick="Our Growth" ta="எங்கள் வளர்ச்சி" title="Every Milestone Tells Our Story" text="Our journey is built on passion, creativity, and the trust of families who invite us to capture their most precious celebrations. Every wedding has helped us grow and create memories that last forever." />
+        <div className="grid g3 stg" style={{ marginTop: 32 }}>
+          <article className="card" style={{ textAlign: "center" }}>
+            <b className="num" style={{ fontSize: "2.4rem", color: "var(--gold)", display: "block", marginBottom: 8 }}>2026</b>
+            <h3 style={{ marginBottom: 8 }}>Where Our Journey Began</h3>
+            <p>Started with a passion for capturing beautiful wedding moments and preserving family memories.</p>
+          </article>
+          <article className="card" style={{ textAlign: "center" }}>
+            <b className="num" style={{ fontSize: "2.4rem", color: "var(--gold)", display: "block", marginBottom: 8 }}>100+</b>
+            <h3 style={{ marginBottom: 8 }}>Happy Families & Celebrations</h3>
+            <p>Thousands of beautiful celebrations captured with love, care, and dedication.</p>
+          </article>
+          <article className="card" style={{ textAlign: "center" }}>
+            <b className="num" style={{ fontSize: "2.4rem", color: "var(--gold)", display: "block", marginBottom: 8 }}>100+</b>
+            <h3 style={{ marginBottom: 8 }}>Creative Professionals</h3>
+            <p>A dedicated team working together to deliver beautiful wedding photography and cinematic films.</p>
+          </article>
+        </div>
+      </div></section>
       <Cta />
     </Layout>
   );

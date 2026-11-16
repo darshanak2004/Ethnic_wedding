@@ -9,12 +9,12 @@ export default function Services() {
       <PageHead
         crumb="Services"
         ta="எங்கள் சேவைகள்"
-        title="Beautiful Moments, Captured Forever"
-        text="From wedding photography to cinematic films, we capture every special moment with creativity and care. Our team brings your wedding memories to life through beautiful photographs and unforgettable films across Tamil Nadu."
+        title="Every Wedding Moment Deserves to Be Remembered"
+        text="From beautiful wedding rituals to candid smiles and cinematic love stories, we capture every special moment with creativity and care. One dedicated team for your wedding photography and films."
       />
 
       <section className="sec"><div className="wrap">
-        <SecHead center kick="What We Do" ta="சேவைகள்" title="Our 9 Photography & Film Services" text="From traditional wedding portraits to candid moments, we turn your precious memories into timeless stories that you and your family will cherish forever." />
+        <SecHead center kick="What We Do" ta="சேவைகள்" title="Every Wedding Moment Deserves to Be Remembered" text="From beautiful wedding rituals to candid smiles and cinematic love stories, we capture every special moment with creativity and care. One dedicated team for your wedding photography and films." />
         <article className="primary rv kolam">
           <span className="tag">Primary service</span>
           <span className="ta">{PRIMARY.ta}</span>
@@ -28,7 +28,7 @@ export default function Services() {
       </div></section>
 
       <section className="sec alt"><div className="wrap" style={{ textAlign: "center" }}>
-        <SecHead center kick="Packages" ta="தொகுப்புகள்" title="Prefer a ready bundle?" text="See our packages, which combine these services for your wedding." />
+        <SecHead center kick="Wedding Packages" ta="தொகுப்புகள்" title="The Perfect Package for Your Special Day" text="Make your wedding memories unforgettable with our thoughtfully designed photography and cinematography packages. Choose the perfect bundle to capture every beautiful moment of your celebration." />
         <Link className="btn wine" to="/packages">View packages</Link>
       </div></section>
 

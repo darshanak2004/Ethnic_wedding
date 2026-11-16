@@ -14,12 +14,10 @@ const HOW_IT_WORKS = [
 ];
 
 const FAQS = [
-  ["Where do you provide wedding photography services?", "We are based in Thoothukudi and offer wedding photography and videography services across Tamil Nadu."],
-  ["What types of wedding photography do you offer?", "We offer candid wedding photography, traditional photography, pre-wedding shoots, engagement photography, and cinematic couple shoots."],
-  ["Do you cover Hindu, Christian, and Muslim weddings?", "Yes! We capture all three wedding traditions, covering every ritual, emotion, and special moment."],
-  ["Do you provide both wedding photography and videography?", "Yes, our team provides complete wedding photography and cinematic videography services to capture your special day."],
-  ["How can I book your wedding photography services?", "Simply contact us with your wedding date, venue, and event details. We will check availability and help you with the booking."],
-  ["How will we receive our wedding photos and videos?", "You will receive professionally edited wedding photographs and cinematic highlight films to cherish and share with your loved ones."],
+  ["Do you shoot photos and film?", "Yes! We provide both professional wedding photography and cinematic videography with one dedicated team to capture every special moment."],
+  ["Do you travel for weddings?", "Absolutely! We travel across Tamil Nadu and other locations to capture weddings and special celebrations."],
+  ["Will you cover every ritual?", "Yes! We plan our coverage around your wedding schedule to capture all important rituals, family moments, and celebrations."],
+  ["What happens after I inquire?", "Once you contact us, our team will connect with you to understand your wedding plans, discuss packages, check availability, and guide you through the booking process."]
 ];
 
 export default function Home({ content }) {
