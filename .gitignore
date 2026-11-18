@@ -18,3 +18,7 @@ dist/
 .DS_Store
 */.DS_Store
 *.log
+
+# Large media assets (store separately / deploy via CDN)
+frontend/public/assets/more photos/
+frontend/public/assets/videos/

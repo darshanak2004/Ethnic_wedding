@@ -80,7 +80,7 @@ function HeroMarquee() {
       >
         {[...images, ...images].map((src, index) => (
           <div className="hero-marquee-slide" key={`${src}-${index}`}>
-            <img src={src} alt="" loading="lazy" draggable="false" />
+            <img src={src} alt="Ethnic Weddings wedding moment" loading="eager" draggable="false" />
           </div>
         ))}
       </div>
@@ -114,7 +114,16 @@ export default function Hero() {
           <p className="hero-tagline">Making Your Wedding Memories Last Forever.</p>
           <div className="hero-footer">
             <div className="cta">
-              <Link className="btn gold" to="/contact">Book your date</Link>
+              <a
+                className="btn gold"
+                href="#book"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("book")?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                Book your date
+              </a>
               <Link className="link" to="/portfolio">View our work →</Link>
             </div>
             <div className="trust">

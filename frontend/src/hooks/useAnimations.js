@@ -13,12 +13,12 @@ export default function useAnimations() {
       const door = document.getElementById("door");
       let d = 0.1;
       if (door) {
-        d = 1.9;
+        d = 0.7;
         gsap.timeline({ onComplete: () => door.remove() })
-          .from("#door .em", { opacity: 0, scale: 0.85, duration: 0.7, ease: "power2.out" })
-          .to("#door .em", { opacity: 0, duration: 0.3 }, 1.05)
-          .to("#door .l", { xPercent: -100, duration: 1, ease: "power3.inOut" }, 1.0)
-          .to("#door .r", { xPercent: 100, duration: 1, ease: "power3.inOut" }, 1.0);
+          .from("#door .em", { opacity: 0, scale: 0.85, duration: 0.3, ease: "power2.out" })
+          .to("#door .em", { opacity: 0, duration: 0.15 }, 0.35)
+          .to("#door .l", { xPercent: -100, duration: 0.45, ease: "power3.inOut" }, 0.4)
+          .to("#door .r", { xPercent: 100, duration: 0.45, ease: "power3.inOut" }, 0.4);
       }
       if ($$(".hero").length) {
         gsap.timeline({ delay: d, defaults: { ease: "power3.out" } })

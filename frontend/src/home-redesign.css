@@ -1,0 +1,1730 @@
+/* ==========================================================================
+   ETHNIC WEDDINGS - COMPLETE HOMEPAGE REDESIGN (50% PHOTOS / 50% CONTENT)
+   BRAND TOKENS:
+   --wine: #4a0b1f; --wine2: #6b1530; --cream: #faf5ec; --paper: #fff;
+   --gold: #c9a04a; --ink: #2a1a1f; --mute: #6f5a60; --line: #e6dccb;
+   --wa: #25b457;
+   FONTS: Cormorant Garamond (headings, 600), Jost (body, 400/500)
+   ========================================================================== */
+
+:root {
+  --wine: #4a0b1f;
+  --wine2: #6b1530;
+  --cream: #faf5ec;
+  --paper: #ffffff;
+  --gold: #c9a04a;
+  --gold-glow: rgba(201, 160, 74, 0.75);
+  --ink: #2a1a1f;
+  --mute: #6f5a60;
+  --line: #e6dccb;
+  --wa: #25b457;
+  --wa-hover: #1fa04c;
+  --font-heading: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px; /* Smooth scroll offset for sticky header */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Accessible focus ring */
+*:focus-visible {
+  outline: 2px solid var(--gold) !important;
+  outline-offset: 3px !important;
+}
+
+/* Container */
+.ew-container {
+  width: 100%;
+  max-width: 1220px;
+  margin-inline: auto;
+  padding-inline: clamp(18px, 4vw, 36px);
+  box-sizing: border-box;
+}
+
+/* Typography Defaults */
+.ew-kicker {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--wine2);
+  margin-bottom: 8px;
+}
+.ew-kicker-gold {
+  color: var(--gold);
+}
+.ew-kicker-wine {
+  color: var(--wine);
+}
+
+/* Tamil Typography Enhancement (Prominent, legible Tamil font sizes) */
+.ew-ta, .ta {
+  font-family: "Noto Serif Tamil", "Mukta", var(--font-body);
+  font-size: 1.16em;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+.ew-kicker .ew-ta {
+  font-size: 1.22em;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.ew-sec-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2.1rem, 4vw, 3.2rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--wine);
+  margin: 0 0 16px;
+  letter-spacing: -0.01em;
+}
+.ew-sec-heading em {
+  font-style: italic;
+  color: var(--wine2);
+}
+.ew-heading-light {
+  color: var(--cream);
+}
+.ew-heading-light em {
+  color: var(--gold);
+}
+
+.ew-sec-intro,
+.ew-sec-body p {
+  font-size: 1.02rem;
+  line-height: 1.68;
+  color: var(--mute);
+  margin: 0 0 14px;
+}
+.ew-intro-light {
+  color: rgba(250, 245, 236, 0.88);
+}
+
+.ew-sec-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto clamp(36px, 5vw, 56px);
+}
+.ew-sec-header-compact {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto clamp(28px, 4vw, 44px);
+}
+.ew-sec-sub {
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  color: var(--mute);
+  line-height: 1.6;
+}
+
+/* Buttons */
+.ew-btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gold);
+  color: var(--wine);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 13px 28px;
+  border-radius: 3px;
+  border: 1px solid var(--gold);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+.ew-btn-gold:hover {
+  background: #d8b05c;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(201, 160, 74, 0.35);
+}
+
+.ew-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 13px 28px;
+  border-radius: 3px;
+  border: 1px solid rgba(250, 245, 236, 0.45);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+.ew-btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(201, 160, 74, 0.1);
+  transform: translateY(-2px);
+}
+
+.ew-btn-wine {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--wine);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 13px 26px;
+  border-radius: 3px;
+  border: 1px solid var(--wine);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.ew-btn-wine:hover {
+  background: var(--wine2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(74, 11, 31, 0.25);
+}
+
+.ew-btn-outline-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--wine);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 13px 26px;
+  border-radius: 3px;
+  border: 1px solid var(--line);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.ew-btn-outline-dark:hover {
+  border-color: var(--wine);
+  background: rgba(74, 11, 31, 0.04);
+}
+
+.ew-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 26px;
+}
+
+/* ==========================================================================
+   1. STICKY HEADER (Wine bg, gold bottom hairline, nav hidden on mobile)
+   ========================================================================== */
+.ew-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--wine);
+  border-bottom: 1px solid rgba(201, 160, 74, 0.35);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+.ew-header-scrolled {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+}
+
+.ew-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 12px clamp(18px, 4vw, 36px);
+  gap: 20px;
+}
+
+.ew-brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--cream);
+}
+.ew-logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+.ew-logo-text {
+  display: flex;
+  flex-direction: column;
+}
+.ew-logo-title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--cream);
+  line-height: 1.1;
+}
+.ew-logo-sub {
+  font-size: 0.62rem;
+  letter-spacing: 0.32em;
+  color: var(--gold);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* Desktop Nav (hidden on mobile <= 900px) */
+.ew-desktop-nav {
+  display: block;
+}
+.ew-nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: clamp(16px, 2.4vw, 32px);
+}
+.ew-nav-link {
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  padding: 6px 0;
+  border-bottom: 1px solid transparent;
+}
+.ew-nav-link:hover {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+.ew-header-action .ew-btn-gold {
+  padding: 10px 22px;
+  font-size: 0.76rem;
+}
+
+@media (max-width: 900px) {
+  .ew-desktop-nav {
+    display: none; /* Nav hidden on mobile per spec */
+  }
+}
+
+/* Ensure no white/cream gap above hero */
+.ew-home-page main,
+main.flush,
+main {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Hide floating WhatsApp button during intro opening curtain */
+#door ~ .wa,
+body:has(#door) .wa {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: scale(0.6);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* ==========================================================================
+   2. HERO (Centred, photo bg, square marquee in middle)
+   ========================================================================== */
+.ew-hero-section {
+  position: relative;
+  min-height: min(100vh, 880px);
+  padding: 36px 0 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--wine);
+  box-sizing: border-box;
+}
+
+.ew-hero-bg-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.ew-hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 32%;
+  display: block;
+}
+.ew-hero-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(74, 11, 31, 0.8) 0%,
+    rgba(74, 11, 31, 0.55) 50%,
+    rgba(74, 11, 31, 0.9) 100%
+  );
+}
+
+.ew-hero-inner {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ew-hero-top {
+  max-width: 900px;
+  padding-inline: clamp(16px, 4vw, 32px);
+  margin-bottom: clamp(16px, 3vh, 28px);
+}
+
+.ew-hero-eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.ew-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 3.8vw, 50px);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--cream);
+  max-width: 24ch;
+  margin: 0 auto 12px;
+  letter-spacing: -0.01em;
+}
+
+.ew-hero-gold-line {
+  display: block;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--gold);
+}
+
+.ew-hero-subtext {
+  font-size: clamp(0.98rem, 1.25vw, 1.15rem);
+  line-height: 1.65;
+  color: rgba(250, 245, 236, 0.92);
+  max-width: 56ch;
+  margin: 0 auto;
+}
+
+/* Hero Middle: Tilted Photo Wall Strip (HeroWallStrip) */
+.ew-hero-wall-wrap {
+  width: 100%;
+  overflow: hidden;
+  /* 2 rows × 240px + 16px gap = 496px stage height.
+     Rotated -4deg on ~1800px wide stage: 496×cos4° + 1800×sin4° = 494 + 125 = 619px.
+     After scale(1.06) = 656px. Buffer -> 670px. */
+  height: clamp(580px, 64vh, 670px);
+  margin-inline: 0;
+  margin-bottom: clamp(20px, 3vh, 36px);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Override the photowall stage specifically when inside the hero wrap.
+   Use !important to beat the later-defined .ew-photowall-stage rule. */
+.ew-hero-wall-wrap .ew-photowall-stage {
+  transform: rotate(-4deg) scale(1.06) !important;
+  gap: 16px !important;
+}
+
+/* Larger cards in the hero strip per user request */
+.ew-hero-wall-wrap .ew-photowall-card {
+  width: 240px !important;
+  height: 240px !important;
+}
+
+/* PhotoWall section (marquee variant — after FAQ) */
+/* Override the section padding so the marquee + overlay work nicely */
+.ew-photowall-sec {
+  position: relative;
+  background: #2c0612;
+  overflow: hidden;
+  /* Extra vertical room so the overlay text card clears the marquee */
+  padding-block: clamp(80px, 12vh, 140px);
+  /* Stack marquee and overlay */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* When the marquee sits inside the photowall section, center it and give it
+   the same dark-wine tint that the tilted wall used to have */
+.ew-photowall-sec .ew-marquee-container {
+  /* Reset the bottom margin so it doesn't push the overlay */
+  margin-bottom: 0;
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  /* Stronger edge fade against the dark wine background */
+  mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+
+/* The overlay sits above the marquee */
+.ew-photowall-overlay {
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+}
+
+/* Hero Middle: Marquee of Square Photos (used outside photowall section) */
+.ew-marquee-container {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: clamp(28px, 4vh, 44px);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.ew-marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: ewMarqueeScroll 55s linear infinite;
+}
+
+.ew-marquee-paused {
+  animation-play-state: paused;
+}
+
+@keyframes ewMarqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.ew-marquee-item {
+  width: 260px;
+  height: 260px;
+  margin-right: 16px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  overflow: hidden;
+  border: 2px solid var(--gold-glow);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+  background: var(--wine2);
+}
+
+.ew-marquee-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.ew-marquee-item:hover .ew-marquee-img {
+  transform: scale(1.05);
+}
+
+.ew-hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .ew-hero-section {
+    padding: 32px 0 80px;
+    min-height: auto;
+  }
+  .ew-marquee-item {
+    width: 160px;
+    height: 160px;
+    margin-right: 12px;
+  }
+  /* Smaller height on mobile so the tilted wall doesn't eat the whole hero */
+  .ew-hero-wall-wrap {
+    height: clamp(340px, 58vw, 440px);
+  }
+  .ew-hero-wall-wrap .ew-photowall-card {
+    width: 160px !important;
+    height: 160px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ew-marquee-track {
+    animation: none;
+    overflow-x: auto;
+  }
+}
+
+/* ==========================================================================
+   3. STATS CARD (Overlaps hero bottom by 52px, CSS zigzag band behind)
+   ========================================================================== */
+.ew-stats-wrapper {
+  position: relative;
+  z-index: 15;
+  width: 100%;
+  max-width: 1100px;
+  margin: -52px auto 0;
+  padding-inline: clamp(16px, 3vw, 24px);
+  box-sizing: border-box;
+}
+
+/* 28px Gold and Maroon Zigzag Band (CSS gradients only) */
+.ew-zigzag-band {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  height: 28px;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    linear-gradient(135deg, var(--gold) 25%, transparent 25%) -14px 0/28px 28px,
+    linear-gradient(225deg, var(--gold) 25%, transparent 25%) -14px 0/28px 28px,
+    linear-gradient(315deg, var(--gold) 25%, transparent 25%) 0 0/28px 28px,
+    linear-gradient(45deg, var(--gold) 25%, var(--wine) 25%) 0 0/28px 28px;
+}
+
+.ew-stats-card {
+  position: relative;
+  z-index: 2;
+  background: #fffdf9;
+  border-radius: 16px;
+  border: 1px solid #e3d9d6;
+  box-shadow: 0 16px 44px rgba(42, 26, 31, 0.08);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: clamp(28px, 3.8vw, 40px) clamp(16px, 2.5vw, 28px);
+}
+
+.ew-stats-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-inline: 14px;
+}
+.ew-stats-cell + .ew-stats-cell {
+  border-left: 1px solid var(--line);
+}
+
+.ew-stats-num {
+  font-family: var(--font-heading);
+  font-size: clamp(40px, 4.2vw, 60px);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--wine);
+  margin-bottom: 8px;
+}
+
+.ew-stats-label {
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .ew-stats-card {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 0;
+    padding: 24px 16px;
+  }
+  .ew-stats-cell:nth-child(2) {
+    border-left: 1px solid var(--line);
+  }
+  .ew-stats-cell:nth-child(3) {
+    border-left: none;
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+  }
+  .ew-stats-cell:nth-child(4) {
+    border-left: 1px solid var(--line);
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+  }
+  .ew-stats-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+}
+
+/* ==========================================================================
+   GENERIC SPLIT SECTION (2-column 1fr 1fr, 56px gap, 88px vertical padding)
+   ========================================================================== */
+.ew-split-sec {
+  padding-block: 88px;
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.ew-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.ew-split-reversed .ew-split-grid {
+  /* Alternated section layout: content on left, media on right */
+  direction: rtl;
+}
+.ew-split-reversed .ew-split-grid > * {
+  direction: ltr;
+}
+
+@media (max-width: 900px) {
+  .ew-split-sec {
+    padding-block: 60px;
+  }
+  .ew-split-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .ew-split-reversed .ew-split-grid {
+    direction: ltr;
+  }
+}
+
+/* ==========================================================================
+   4. ABOUT SECTION (Arched photo left, text right)
+   ========================================================================== */
+.ew-about-sec {
+  padding-top: 108px;
+}
+
+.ew-arched-photo-frame {
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 4/5;
+  border-radius: 200px 200px 3px 3px;
+  overflow: hidden;
+  margin-inline: auto;
+  box-shadow: 0 16px 40px rgba(74, 11, 31, 0.1);
+  border: 1px solid var(--line);
+  background: var(--wine2);
+}
+
+.ew-arched-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+.ew-ticks-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ew-tick-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.ew-tick-bullet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--wine);
+  color: var(--gold);
+  font-size: 0.75rem;
+  font-weight: bold;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   5. PORTFOLIO (White bg, centred heading, 4-col 210px row height grid)
+   ========================================================================== */
+.ew-portfolio-sec {
+  background: var(--paper);
+  padding-block: 88px;
+}
+
+.ew-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 210px;
+  gap: 14px;
+}
+
+.ew-photo-tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--wine2);
+  box-shadow: 0 4px 14px rgba(42, 26, 31, 0.06);
+}
+.ew-grid-std {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+.ew-grid-tall {
+  grid-column: span 1;
+  grid-row: span 2;
+}
+.ew-grid-wide {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+.ew-tile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.ew-photo-tile:hover .ew-tile-img {
+  transform: scale(1.05);
+}
+
+.ew-portfolio-action {
+  text-align: center;
+  margin-top: 44px;
+}
+
+@media (max-width: 900px) {
+  .ew-portfolio-sec {
+    padding-block: 60px;
+  }
+  .ew-photo-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 180px;
+  }
+  .ew-grid-wide {
+    grid-column: span 2;
+  }
+}
+
+/* ==========================================================================
+   6. SERVICES (Photo cluster left: 1 tall + 2 stacked, list right)
+   ========================================================================== */
+.ew-services-sec {
+  background: var(--cream);
+}
+
+.ew-photo-cluster {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: 500px;
+  margin-inline: auto;
+}
+
+.ew-cluster-tall {
+  height: 100%;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(74, 11, 31, 0.08);
+  background: var(--wine2);
+}
+.ew-cluster-stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ew-cluster-box {
+  flex: 1;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(74, 11, 31, 0.08);
+  background: var(--wine2);
+}
+.ew-cluster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.ew-cluster-tall:hover .ew-cluster-img,
+.ew-cluster-box:hover .ew-cluster-img {
+  transform: scale(1.04);
+}
+
+.ew-services-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.ew-service-row {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.ew-service-gold-num {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.ew-service-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.ew-service-heading {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--wine);
+  margin: 0;
+}
+.ew-service-ta {
+  font-size: 0.8rem;
+  color: var(--mute);
+}
+.ew-service-text {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--mute);
+  margin: 0;
+}
+
+/* ==========================================================================
+   7. CINEMATIC FILMS (Wine bg, text & 3 thumbs left, featured video right)
+   ========================================================================== */
+.ew-films-sec {
+  background: var(--wine);
+  color: var(--cream);
+}
+
+.ew-films-thumb-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.ew-film-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  padding: 10px 14px;
+  color: var(--cream);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  width: 100%;
+}
+.ew-film-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(201, 160, 74, 0.4);
+}
+.ew-film-tab-active {
+  background: rgba(201, 160, 74, 0.12) !important;
+  border-color: var(--gold) !important;
+}
+
+.ew-film-tab-thumb {
+  position: relative;
+  width: 88px;
+  height: 58px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  overflow: hidden;
+  background: #000;
+}
+.ew-film-tab-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.ew-film-tab-duration {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 0.65rem;
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+
+.ew-film-tab-title {
+  font-family: var(--font-heading);
+  font-size: 1.18rem;
+  font-weight: 600;
+  color: var(--cream);
+  margin: 0 0 2px;
+}
+.ew-film-tab-loc {
+  font-size: 0.82rem;
+  color: rgba(250, 245, 236, 0.72);
+}
+
+.ew-film-player-tile {
+  width: 100%;
+  max-width: 580px;
+  aspect-ratio: 16/9;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+  background: #000;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(201, 160, 74, 0.3);
+  margin-inline: auto;
+}
+
+.ew-film-poster-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.ew-film-poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.ew-film-poster-wrap:hover .ew-film-poster-img {
+  transform: scale(1.03);
+}
+
+.ew-film-scrim {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.65) 100%);
+}
+
+.ew-film-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--wine);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.ew-film-play-btn svg {
+  margin-left: 3px;
+}
+.ew-film-poster-wrap:hover .ew-film-play-btn {
+  transform: translate(-50%, -50%) scale(1.12);
+  background: #dfbe73;
+}
+
+.ew-film-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(42, 26, 31, 0.85);
+  color: var(--cream);
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 2px;
+  border: 1px solid rgba(201, 160, 74, 0.3);
+}
+
+.ew-film-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   8. PROCESS (Photo left, 4 numbered steps right)
+   ========================================================================== */
+.ew-process-sec {
+  background: var(--paper);
+}
+
+.ew-process-photo-frame {
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 4/5;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-inline: auto;
+  box-shadow: 0 14px 36px rgba(74, 11, 31, 0.08);
+  border: 1px solid var(--line);
+  background: var(--wine2);
+}
+.ew-process-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ew-steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.ew-step-card {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.ew-step-badge {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1;
+  background: rgba(201, 160, 74, 0.12);
+  width: 42px;
+  height: 42px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(201, 160, 74, 0.3);
+}
+
+.ew-step-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--wine);
+  margin: 0 0 4px;
+}
+.ew-step-desc {
+  font-size: 0.94rem;
+  line-height: 1.58;
+  color: var(--mute);
+  margin: 0;
+}
+
+/* ==========================================================================
+   9. TESTIMONIALS (White bg, 3 cards, photo on top, quote & client name)
+   ========================================================================== */
+.ew-testimonials-sec {
+  background: var(--paper);
+  padding-block: 88px;
+}
+
+.ew-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.ew-testimonial-card {
+  background: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 24px rgba(74, 11, 31, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.ew-testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(74, 11, 31, 0.1);
+}
+
+.ew-testimonial-text-card {
+  padding: clamp(28px, 4vw, 36px);
+  border-top: 3px solid var(--gold);
+  min-height: 250px;
+  justify-content: space-between;
+}
+
+.ew-testimonial-stars {
+  color: var(--gold);
+  letter-spacing: 0.25em;
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+}
+
+.ew-quote-mark {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  line-height: 0.8;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.ew-testimonial-quote {
+  font-size: 1.02rem;
+  line-height: 1.68;
+  color: var(--ink);
+  font-style: italic;
+  margin: 0 0 20px;
+  flex: 1;
+}
+
+.ew-testimonial-author {
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.ew-author-name {
+  font-family: var(--font-heading);
+  font-size: 1.18rem;
+  font-weight: 600;
+  color: var(--wine);
+  margin: 0 0 2px;
+}
+.ew-author-loc {
+  font-size: 0.82rem;
+  color: var(--gold);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 900px) {
+  .ew-testimonials-sec {
+    padding-block: 60px;
+  }
+  .ew-testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   10. FAQ (Native details/summary accordion on left, photo on right)
+   ========================================================================== */
+.ew-faq-sec {
+  background: var(--cream);
+}
+
+.ew-faq-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.ew-faq-details {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  overflow: hidden;
+  transition: border-color 0.25s ease;
+}
+.ew-faq-details[open] {
+  border-color: var(--wine);
+}
+
+.ew-faq-summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 20px;
+  font-family: var(--font-heading);
+  font-size: 1.18rem;
+  font-weight: 600;
+  color: var(--wine);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+.ew-faq-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ew-faq-arrow {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--gold);
+  border-bottom: 2px solid var(--gold);
+  transform: rotate(45deg);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+.ew-faq-details[open] .ew-faq-arrow {
+  transform: rotate(-135deg);
+}
+
+.ew-faq-answer {
+  padding: 0 20px 18px;
+  font-size: 0.95rem;
+  line-height: 1.62;
+  color: var(--mute);
+}
+
+.ew-faq-photo-frame {
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 4/5;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-inline: auto;
+  box-shadow: 0 14px 36px rgba(74, 11, 31, 0.08);
+  border: 1px solid var(--line);
+  background: var(--wine2);
+}
+.ew-faq-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ==========================================================================
+   11. PHOTO WALL SECTION (now a marquee strip with text overlay)
+       The .ew-photowall-sec rules are defined earlier (near Hero section).
+       Styles below are for the tilted stage used inside HeroWallStrip.
+   ========================================================================== */
+/* (ew-photowall-sec defined above near the hero wall strip rules) */
+
+.ew-photowall-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transform: rotate(-7deg) scale(1.22);
+  transform-origin: center center;
+  width: 125vw;
+  margin-left: -12.5vw;
+}
+
+.ew-photowall-row {
+  overflow: hidden;
+  width: 100%;
+}
+
+.ew-photowall-track {
+  display: flex;
+  width: max-content;
+  gap: 14px;
+}
+
+.ew-row-normal .ew-photowall-track {
+  animation: ewPhotoWallNormal 80s linear infinite;
+}
+.ew-row-reverse .ew-photowall-track {
+  animation: ewPhotoWallReverse 80s linear infinite;
+}
+
+@keyframes ewPhotoWallNormal {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes ewPhotoWallReverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.ew-photowall-card {
+  width: 210px;
+  height: 210px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  overflow: hidden;
+  background: #140206;
+  border: 1px solid rgba(201, 160, 74, 0.25);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.ew-photowall-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Centred overlay with soft dark radial gradient behind text only */
+.ew-photowall-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 10;
+  padding: 20px;
+}
+
+.ew-photowall-card-text {
+  pointer-events: auto;
+  text-align: center;
+  max-width: 580px;
+  padding: clamp(36px, 5vw, 56px) clamp(24px, 4vw, 44px);
+  border-radius: 6px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(44, 6, 18, 0.94) 0%,
+    rgba(44, 6, 18, 0.86) 55%,
+    rgba(44, 6, 18, 0.1) 100%
+  );
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(201, 160, 74, 0.3);
+}
+
+.ew-photowall-h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 600;
+  color: var(--cream);
+  margin: 6px 0 12px;
+}
+
+.ew-photowall-p {
+  font-size: 1.05rem;
+  color: rgba(250, 245, 236, 0.92);
+  margin: 0 0 26px;
+}
+
+@media (max-width: 768px) {
+  .ew-photowall-sec {
+    padding: 50px 0;
+  }
+  .ew-photowall-card {
+    width: 130px;
+    height: 130px;
+  }
+  .ew-photowall-stage {
+    gap: 10px;
+    transform: rotate(-5deg) scale(1.2);
+  }
+  .ew-photowall-track {
+    gap: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ew-photowall-track {
+    animation: none;
+    overflow-x: auto;
+  }
+}
+
+/* ==========================================================================
+   12. INQUIRY FORM (160deg wine gradient, 3px gold top border, centred cream card)
+   ========================================================================== */
+.ew-inquiry-sec {
+  position: relative;
+  background: linear-gradient(160deg, #4a0b1f 0%, #2c0612 100%);
+  border-top: 3px solid var(--gold);
+  padding-block: clamp(70px, 9vw, 110px);
+}
+
+.ew-inquiry-card {
+  width: 100%;
+  max-width: 860px;
+  margin-inline: auto;
+  background: var(--cream);
+  padding: clamp(28px, 4.5vw, 44px);
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(201, 160, 74, 0.3);
+  box-sizing: border-box;
+}
+
+.ew-inquiry-head {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto clamp(24px, 3.5vw, 36px);
+}
+
+.ew-inquiry-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 600;
+  color: var(--wine);
+  margin: 6px 0 10px;
+}
+
+.ew-inquiry-sub {
+  font-size: 0.96rem;
+  color: var(--mute);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.ew-inquiry-error {
+  background: #fdf2f2;
+  color: #9b1c1c;
+  border: 1px solid #f8b4b4;
+  padding: 12px 16px;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.ew-inquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ew-inquiry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.ew-field-full {
+  grid-column: span 2;
+}
+
+.ew-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ew-field-group label {
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.ew-req {
+  color: var(--wine2);
+}
+
+.ew-input,
+.ew-select,
+.ew-textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 12px 14px;
+  border-radius: 3px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--ink);
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.ew-input:focus,
+.ew-select:focus,
+.ew-textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 160, 74, 0.2);
+}
+
+.ew-btn-whatsapp {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--wa);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 16px 28px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin-top: 8px;
+}
+.ew-btn-whatsapp:hover {
+  background: var(--wa-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(37, 180, 87, 0.35);
+}
+
+.ew-inquiry-note {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--mute);
+  margin: 6px 0 0;
+}
+
+@media (max-width: 768px) {
+  .ew-inquiry-grid {
+    grid-template-columns: 1fr;
+  }
+  .ew-field-full {
+    grid-column: span 1;
+  }
+}
+
+/* ==========================================================================
+   13. FOOTER (Very dark wine, gold top border, 4 cols + copyright)
+   ========================================================================== */
+.ew-footer {
+  background: #1c030a;
+  color: var(--cream);
+  border-top: 3px solid var(--gold);
+  padding: clamp(60px, 8vw, 88px) 0 32px;
+}
+
+.ew-footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  gap: clamp(32px, 4vw, 56px);
+  margin-bottom: 56px;
+}
+
+.ew-footer-brand {
+  display: flex;
+  flex-direction: column;
+}
+.ew-footer-logo-img {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+.ew-footer-tagline-ta {
+  color: var(--gold);
+  font-family: "Noto Serif Tamil", serif;
+  font-size: 0.95rem;
+  margin: 0 0 10px;
+}
+.ew-footer-desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(250, 245, 236, 0.75);
+  margin: 0;
+}
+
+.ew-footer-heading {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  color: var(--gold);
+  margin: 0 0 16px;
+  font-weight: 600;
+}
+
+.ew-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ew-footer-links a,
+.ew-footer-links li {
+  font-size: 0.9rem;
+  color: rgba(250, 245, 236, 0.8);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.ew-footer-links a:hover {
+  color: var(--gold);
+}
+
+.ew-footer-bottom {
+  padding-top: 24px;
+  border-top: 1px solid rgba(230, 220, 203, 0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: rgba(250, 245, 236, 0.6);
+}
+.ew-footer-bottom p {
+  margin: 0;
+}
+.ew-footer-admin-link {
+  color: rgba(250, 245, 236, 0.4);
+  text-decoration: none;
+  font-size: 0.78rem;
+}
+.ew-footer-admin-link:hover {
+  color: var(--gold);
+}
+
+@media (max-width: 900px) {
+  .ew-footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+}
+@media (max-width: 600px) {
+  .ew-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
