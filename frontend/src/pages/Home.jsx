@@ -1,6 +1,7 @@
 import useAnimations from "../hooks/useAnimations";
 import Header from "../components/home/Header";
 import Hero from "../components/home/Hero";
+import MobileServiceStrip from "../components/home/MobileServiceStrip";
 import StatsCard from "../components/home/StatsCard";
 import AboutSection from "../components/home/AboutSection";
 import PhotoGrid from "../components/home/PhotoGrid";
@@ -38,6 +39,9 @@ export default function Home() {
       <main className="flush" style={{ paddingTop: 0, marginTop: 0 }}>
         {/* 2. HERO */}
         <Hero />
+
+        {/* 2b. Mobile-only service text strip (below video hero) */}
+        <MobileServiceStrip />
 
         {/* 3. STATS CARD overlapping hero bottom */}
         <StatsCard />
