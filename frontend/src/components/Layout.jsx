@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import Nav from "./Nav";
+import Header from "./home/Header";
 import Footer from "./Footer";
 import useAnimations from "../hooks/useAnimations";
 import { WA } from "../api";
@@ -20,7 +20,7 @@ export default function Layout({ children, door, overHero }) {
           <div className="em"><img src="/assets/mono-cream.png" alt="" /><span className="ta" style={{ letterSpacing: ".1em", fontSize: "1rem" }}>வணக்கம்</span></div>
         </div>
       )}
-      <Nav overHero={overHero} /><main className={overHero ? "flush" : undefined}>{children}</main><Footer />
+      <Header /><main className={overHero ? "flush" : undefined}>{children}</main><Footer />
       {WA && (
         <a
           className="wa"

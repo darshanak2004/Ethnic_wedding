@@ -54,6 +54,33 @@ export default function About() {
         <div className="grid g3 stg">{TR.map((t) => <article className="card" key={t[1]}><span className="ta">{t[0]}</span><h3>{t[1]}</h3><p>{t[2]}</p></article>)}</div>
       </div></section>
 
+      {/* Added Section: Why Families Choose Us */}
+      <section className="sec"><div className="wrap">
+        <SecHead center kick="Why Families Choose Us" ta="எங்களை ஏன் தேர்ந்தெடுக்கிறார்கள்" title="The Ethnic Weddings Difference" text="We treat every wedding as if it were our own family's celebration, with care, craftsmanship, and cutting-edge cinema equipment." />
+        <div className="grid g4 stg">
+          <article className="card">
+            <div className="ico">✦</div>
+            <h3>Cinematic 4K & Drone</h3>
+            <p>Full 4K cinema cameras with aerial drone coverage to capture grand processions and sweeping venues.</p>
+          </article>
+          <article className="card">
+            <div className="ico">◈</div>
+            <h3>Candid & Real Emotions</h3>
+            <p>We document heartfelt moments, happy tears, and spontaneous laughter naturally without forced poses.</p>
+          </article>
+          <article className="card">
+            <div className="ico">❖</div>
+            <h3>One Unified Team</h3>
+            <p>Seamless coordination between photographers and cinematographers, avoiding crowded aisles and missed moments.</p>
+          </article>
+          <article className="card">
+            <div className="ico">▶</div>
+            <h3>Prompt & Reliable Delivery</h3>
+            <p>Carefully color-graded high-res photos and teaser highlight reels delivered within promised timelines.</p>
+          </article>
+        </div>
+      </div></section>
+
       <section className="sec alt"><div className="wrap">
         <SecHead center kick="Our Growth" ta="எங்கள் வளர்ச்சி" title="Every Milestone Tells Our Story" text="Our journey is built on passion, creativity, and the trust of families who invite us to capture their most precious celebrations. Every wedding has helped us grow and create memories that last forever." />
         <div className="grid g3 stg" style={{ marginTop: 32 }}>

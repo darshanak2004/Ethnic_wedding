@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const NAV_LINKS = [
-  { id: "about", label: "About", fallback: "/about" },
+  { id: "home", label: "Home", to: "/" },
+  { id: "about", label: "About", to: "/about" },
   { id: "portfolio", label: "Portfolio", to: "/portfolio" },
-  { id: "services", label: "Services", fallback: "/services" },
-  { id: "films", label: "Films", fallback: "/#films" },
-  { id: "process", label: "Process", fallback: "/experience" },
-  { id: "faq", label: "FAQ", fallback: "/#faq" },
+  { id: "services", label: "Services", to: "/services" },
+  { id: "packages", label: "Packages", to: "/packages" },
+  { id: "contact", label: "Contact", to: "/contact" },
 ];
 
 export default function Header() {
@@ -22,26 +22,6 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const handleNavClick = (e, link) => {
-    if (pathname === "/") {
-      e.preventDefault();
-      const el = document.getElementById(link.id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  };
-
-  const handleBookClick = (e) => {
-    if (pathname === "/") {
-      e.preventDefault();
-      const el = document.getElementById("inquiry");
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  };
 
   return (
     <header className={`ew-header ${scrolled ? "ew-header-scrolled" : ""}`}>
@@ -61,68 +41,53 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* Desktop Nav (Hidden on mobile) */}
+        {/* Desktop Nav (Home, About, Portfolio, Services, Packages, Contact) */}
         <nav className="ew-desktop-nav" aria-label="Primary Navigation">
           <ul className="ew-nav-list">
-            {NAV_LINKS.map((link) => (
-              <li key={link.id} className="ew-nav-item">
-                {link.to ? (
-                  <Link to={link.to} className="ew-nav-link">
-                    {link.label}
-                  </Link>
-                ) : pathname === "/" ? (
-                  <a
-                    href={`#${link.id}`}
-                    onClick={(e) => handleNavClick(e, link)}
-                    className="ew-nav-link"
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.to;
+              return (
+                <li key={link.id} className="ew-nav-item">
+                  <Link
+                    to={link.to}
+                    className={`ew-nav-link ${isActive ? "ew-nav-link-active" : ""}`}
+                    style={isActive ? { color: "var(--gold)", borderBottomColor: "var(--gold)" } : {}}
                   >
                     {link.label}
-                  </a>
-                ) : (
-                  <Link to={link.fallback} className="ew-nav-link">
-                    {link.label}
                   </Link>
-                )}
-              </li>
-            ))}
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
         {/* Book Your Date Button */}
         <div className="ew-header-action">
-          <a
-            href={pathname === "/" ? "#inquiry" : "/#inquiry"}
-            onClick={handleBookClick}
+          <Link
+            to="/contact"
             className="ew-btn-gold"
           >
             Book your date
-          </a>
+          </Link>
         </div>
       </div>
 
-      {/* Mobile Category Nav Bar (Smooth horizontal scroll on mobile) */}
+      {/* Mobile Category Nav Bar (Home, About, Portfolio, Services, Packages, Contact) */}
       <nav className="ew-mobile-nav-bar" aria-label="Categories">
         <div className="ew-mobile-nav-inner">
-          {NAV_LINKS.map((link) =>
-            link.to ? (
-              <Link key={link.id} to={link.to} className="ew-mobile-nav-pill">
-                {link.label}
-              </Link>
-            ) : pathname === "/" ? (
-              <a
+          {NAV_LINKS.map((link) => {
+            const isActive = pathname === link.to;
+            return (
+              <Link
                 key={link.id}
-                href={`#${link.id}`}
-                onClick={(e) => handleNavClick(e, link)}
-                className="ew-mobile-nav-pill"
+                to={link.to}
+                className={`ew-mobile-nav-pill ${isActive ? "ew-pill-active" : ""}`}
+                style={isActive ? { background: "var(--gold)", color: "var(--wine)", borderColor: "var(--gold)" } : {}}
               >
                 {link.label}
-              </a>
-            ) : (
-              <Link key={link.id} to={link.fallback} className="ew-mobile-nav-pill">
-                {link.label}
               </Link>
-            )
-          )}
+            );
+          })}
         </div>
       </nav>
     </header>
