@@ -731,6 +731,8 @@ body:has(#door) .wa {
   .ew-mvh-overlay {
     position: absolute;
     inset: 0;
+    z-index: 2; /* above video (z-auto) but below content (z-10) */
+    pointer-events: none; /* don't block touch on video */
     background: linear-gradient(
       180deg,
       transparent 0%,
