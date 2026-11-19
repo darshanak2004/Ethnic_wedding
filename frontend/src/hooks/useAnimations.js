@@ -38,10 +38,10 @@ export default function useAnimations() {
         ScrollTrigger.create({ trigger: el, start: "top 92%", once: true, onEnter: () => gsap.to(o, { v: n, duration: 1.8, ease: "power2.out", onUpdate: () => (el.textContent = Math.round(o.v) + s) }) });
       });
 
-      // Scroll-over curtain effect: Photo Wall Marquee (.ew-photowall-sec) pinned while Inquiry Form (#inquiry) scrolls over
+      // Scroll-over curtain effect: Photo Wall Marquee (.ew-photowall-sec) pinned on desktop (>= 768px) while Inquiry Form (#inquiry) scrolls over
       const photoWallSec = document.querySelector(".ew-photowall-sec");
       const inquirySec = document.querySelector(".ew-inquiry-sec");
-      if (photoWallSec && inquirySec) {
+      if (window.innerWidth >= 768 && photoWallSec && inquirySec) {
         ScrollTrigger.create({
           trigger: photoWallSec,
           start: "top 72px",

@@ -1,8 +1,14 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { WA } from "../../api";
 
 export default function HomeFooter() {
   const currentYear = new Date().getFullYear();
+  const [openSection, setOpenSection] = useState({ explore: false, contact: false });
+
+  const toggle = (sec) => {
+    setOpenSection((prev) => ({ ...prev, [sec]: !prev[sec] }));
+  };
 
   return (
     <footer className="ew-footer">
@@ -26,9 +32,18 @@ export default function HomeFooter() {
             </p>
           </div>
 
-          {/* Col 2: Explore */}
-          <div className="ew-footer-col">
-            <h4 className="ew-footer-heading">Explore</h4>
+          {/* Col 2: Explore (Collapsible accordion on mobile) */}
+          <div className={`ew-footer-col ew-footer-accordion ${openSection.explore ? "ew-col-open" : ""}`}>
+            <h4
+              className="ew-footer-heading ew-footer-toggle-head"
+              onClick={() => toggle("explore")}
+              role="button"
+              tabIndex={0}
+              aria-expanded={openSection.explore}
+            >
+              <span>Explore</span>
+              <span className="ew-footer-acc-icon">{openSection.explore ? "−" : "+"}</span>
+            </h4>
             <ul className="ew-footer-links">
               <li><Link to="/">Home</Link></li>
               <li><Link to="/about">About Us</Link></li>
@@ -40,8 +55,8 @@ export default function HomeFooter() {
             </ul>
           </div>
 
-          {/* Col 3: Services */}
-          <div className="ew-footer-col">
+          {/* Col 3: Services (Desktop only — hidden on mobile to avoid duplication) */}
+          <div className="ew-footer-col ew-footer-col-services">
             <h4 className="ew-footer-heading">Services</h4>
             <ul className="ew-footer-links">
               <li><Link to="/services">Wedding Photography</Link></li>
@@ -53,9 +68,18 @@ export default function HomeFooter() {
             </ul>
           </div>
 
-          {/* Col 4: Contact */}
-          <div className="ew-footer-col">
-            <h4 className="ew-footer-heading">Contact</h4>
+          {/* Col 4: Contact (Collapsible accordion on mobile) */}
+          <div className={`ew-footer-col ew-footer-accordion ${openSection.contact ? "ew-col-open" : ""}`}>
+            <h4
+              className="ew-footer-heading ew-footer-toggle-head"
+              onClick={() => toggle("contact")}
+              role="button"
+              tabIndex={0}
+              aria-expanded={openSection.contact}
+            >
+              <span>Contact</span>
+              <span className="ew-footer-acc-icon">{openSection.contact ? "−" : "+"}</span>
+            </h4>
             <ul className="ew-footer-links">
               <li>Thoothukudi, Tamil Nadu</li>
               {WA && (

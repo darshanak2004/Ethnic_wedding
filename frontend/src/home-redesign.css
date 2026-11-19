@@ -24,17 +24,30 @@
 }
 
 html {
+  overflow-x: hidden;
   scroll-behavior: smooth;
   scroll-padding-top: 72px; /* Smooth scroll offset for sticky header */
 }
 
 body {
+  overflow-x: hidden;
   margin: 0;
   padding: 0;
   font-family: var(--font-body);
   background: var(--cream);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Desktop default states for hamburger & drawer & footer accordion */
+.ew-hamburger-btn {
+  display: none;
+}
+.ew-mobile-drawer {
+  display: none;
+}
+.ew-footer-acc-icon {
+  display: none;
 }
 
 /* Accessible focus ring */
@@ -1850,277 +1863,398 @@ body:has(#door) .wa {
 }
 
 /* ==========================================================================
-   14. COMPREHENSIVE MOBILE VIEW POLISH (< 768px)
-   Eliminates all clumsiness: sleek landscape hero, mobile categories bar,
-   balanced typography, touch-friendly buttons, and flawless spacing.
+   14. MOBILE VIEW SPECIALIZATION (< 768px)
+   All mobile-specific bug fixes and clean layout optimizations.
+   Desktop view (>= 768px) remains 100% untouched.
    ========================================================================== */
 @media (max-width: 768px) {
-  /* Header refinements */
+  /* 8. GENERAL: Overflow prevention, section padding, scroll offset */
+  html {
+    scroll-padding-top: 64px !important;
+  }
+  body {
+    overflow-x: hidden !important;
+  }
+  .ew-container, .wrap {
+    padding-inline: 20px !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .ew-split-sec,
+  .ew-portfolio-sec,
+  .ew-services-sec,
+  .ew-films-sec,
+  .ew-process-sec,
+  .ew-testimonials-sec,
+  .ew-faq-sec,
+  .ew-inquiry-sec,
+  .sec {
+    padding-block: 48px !important;
+  }
+
+  /* 2. HEADER: One slim sticky bar on mobile */
+  .ew-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+  }
   .ew-header-inner {
-    padding: 8px 14px;
-    gap: 8px;
+    padding: 10px 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+  }
+  .ew-brand-logo {
+    gap: 8px !important;
   }
   .ew-logo-img {
-    width: 34px;
-    height: 34px;
+    width: 32px !important;
+    height: 32px !important;
   }
   .ew-logo-title {
-    font-size: 1.12rem;
-    letter-spacing: 0.05em;
+    font-size: 1.08rem !important;
+    letter-spacing: 0.05em !important;
   }
   .ew-logo-sub {
-    font-size: 0.56rem;
-    letter-spacing: 0.24em;
+    font-size: 0.54rem !important;
+    letter-spacing: 0.22em !important;
   }
-  .ew-header-action .ew-btn-gold {
-    padding: 8px 13px;
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
+  .ew-header-action {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
   }
-
-  /* Section Headings & Spacing */
-  .ew-sec-header {
-    margin-bottom: 28px;
-  }
-  .ew-sec-heading {
-    font-size: clamp(1.8rem, 5.8vw, 2.3rem);
-    line-height: 1.2;
-    margin-bottom: 10px;
-  }
-  .ew-sec-intro,
-  .ew-sec-body p {
-    font-size: 0.94rem;
-    line-height: 1.6;
-  }
-  .ew-kicker {
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    margin-bottom: 6px;
-  }
-  .ew-kicker .ew-ta {
-    font-size: 1.08em;
+  .ew-header-book-btn {
+    padding: 7px 13px !important;
+    font-size: 0.68rem !important;
+    letter-spacing: 0.1em !important;
+    white-space: nowrap !important;
   }
 
-  /* Split Sections */
-  .ew-split-sec {
-    padding-block: 48px;
-  }
-  .ew-split-grid {
-    gap: 28px;
+  /* Remove horizontally scrolling pill nav on mobile */
+  .ew-mobile-nav-bar {
+    display: none !important;
   }
 
-  /* About Section Arched Photo */
-  .ew-arched-photo-frame {
-    max-width: 300px;
-    aspect-ratio: 4 / 5;
-    border-radius: 150px 150px 3px 3px;
+  /* Hamburger Menu Button */
+  .ew-hamburger-btn {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    width: 34px !important;
+    height: 34px !important;
+    background: transparent !important;
+    border: 1px solid rgba(201, 160, 74, 0.45) !important;
+    border-radius: 4px !important;
+    padding: 7px 6px !important;
+    cursor: pointer !important;
+    box-sizing: border-box !important;
   }
-  .ew-ticks-list {
-    margin-top: 16px;
-    gap: 10px;
+  .ew-burger-line {
+    display: block !important;
+    width: 100% !important;
+    height: 2px !important;
+    background: var(--gold) !important;
+    transition: all 0.25s ease !important;
   }
-  .ew-tick-item {
-    font-size: 0.9rem;
-    gap: 10px;
+  .ew-burger-open .ew-burger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg) !important;
+  }
+  .ew-burger-open .ew-burger-line:nth-child(2) {
+    opacity: 0 !important;
+  }
+  .ew-burger-open .ew-burger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg) !important;
   }
 
-  /* Portfolio Grid */
-  .ew-portfolio-sec {
-    padding-block: 48px;
+  /* Mobile Full Navigation Drawer */
+  .ew-mobile-drawer {
+    display: block !important;
+    position: fixed !important;
+    top: 56px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(28, 3, 10, 0.98) !important;
+    backdrop-filter: blur(12px) !important;
+    z-index: 999 !important;
+    overflow-y: auto !important;
+    padding: 24px 20px 48px !important;
+    border-top: 1px solid rgba(201, 160, 74, 0.25) !important;
+    animation: ewFadeIn 0.2s ease !important;
   }
+  .ew-mobile-menu-list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 0 28px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .ew-mobile-menu-item {
+    margin: 0 !important;
+  }
+  .ew-mobile-menu-link {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    font-family: var(--font-heading) !important;
+    font-size: 1.4rem !important;
+    color: var(--cream) !important;
+    text-decoration: none !important;
+    padding: 12px 14px !important;
+    border-radius: 6px !important;
+    border-bottom: 1px solid rgba(201, 160, 74, 0.15) !important;
+    transition: background 0.2s, color 0.2s !important;
+  }
+  .ew-mobile-menu-link:hover,
+  .ew-mobile-link-active {
+    color: var(--gold) !important;
+    background: rgba(201, 160, 74, 0.12) !important;
+  }
+  .ew-mobile-active-dot {
+    font-size: 0.85rem !important;
+    color: var(--gold) !important;
+  }
+  .ew-mobile-drawer-action {
+    margin-top: 10px !important;
+  }
+
+  /* 2. HERO: Remove duplicate Book Your Date button on mobile */
+  .ew-hero-cta-group {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 320px !important;
+    margin: 0 auto !important;
+    padding-inline: 16px !important;
+  }
+  .ew-hero-btn-book {
+    display: none !important; /* Duplicate removed from mobile hero */
+  }
+  .ew-hero-btn-contact {
+    display: inline-flex !important;
+    width: 100% !important;
+    max-width: 240px !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 12px 24px !important;
+    font-size: 0.78rem !important;
+  }
+
+  /* 3. TAMIL TEXT: Keep only on main section headings; hide on small labels/sub-text */
+  .ew-kicker .ew-ta,
+  .ew-hero-eyebrow .ew-ta-eyebrow,
+  .ew-service-ta,
+  .ew-service-row .ew-ta,
+  .card .ta,
+  .pk .ta,
+  .ew-footer-tagline-ta,
+  .ew-ta-sub,
+  .ew-ta-label,
+  ul li .ta,
+  .ticks .ta {
+    display: none !important;
+  }
+
+  /* 4. PORTFOLIO GRID: Clean 2-column grid, aspect-ratio 4/5, equal height, show 6 photos */
   .ew-photo-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 140px;
-    gap: 8px;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-auto-rows: auto !important;
+    gap: 10px !important;
+  }
+  .ew-photo-tile {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+    aspect-ratio: 4 / 5 !important;
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 4px !important;
+    overflow: hidden !important;
+    background: var(--wine2) !important;
+  }
+  .ew-photo-tile .ew-tile-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  /* Show only 6 photos on mobile, hide 7th onward */
+  .ew-photo-tile:nth-child(n+7) {
+    display: none !important;
   }
   .ew-portfolio-action {
-    margin-top: 28px;
+    margin-top: 28px !important;
+    text-align: center !important;
+  }
+  .ew-portfolio-action .ew-btn-outline-dark {
+    padding: 12px 24px !important;
+    font-size: 0.78rem !important;
   }
 
-  /* Services Cluster & Stack */
-  .ew-services-sec {
-    padding-block: 48px;
-  }
-  .ew-photo-cluster {
-    max-width: 330px;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-  .ew-services-stack {
-    gap: 14px;
-    margin-top: 14px;
-  }
-  .ew-service-row {
-    gap: 14px;
-    padding-bottom: 12px;
-  }
-  .ew-service-gold-num {
-    font-size: 1.35rem;
-  }
-  .ew-service-heading {
-    font-size: 1.15rem;
-  }
-  .ew-service-text {
-    font-size: 0.88rem;
-  }
-
-  /* Cinematic Films */
-  .ew-films-sec {
-    padding-block: 48px;
-  }
-  .ew-film-player-tile {
-    max-width: 100%;
-    aspect-ratio: 16 / 9;
-    border-radius: 4px;
-  }
-  .ew-film-play-btn {
-    width: 48px;
-    height: 48px;
-  }
-  .ew-films-thumb-list {
-    gap: 8px;
-    margin-top: 16px;
-  }
-  .ew-film-tab-btn {
-    padding: 8px 10px;
-    gap: 10px;
-  }
-  .ew-film-tab-thumb {
-    width: 72px;
-    height: 48px;
-  }
-  .ew-film-tab-title {
-    font-size: 1.02rem;
-  }
-  .ew-film-tab-loc {
-    font-size: 0.74rem;
-  }
-
-  /* Process Steps */
-  .ew-process-sec {
-    padding-block: 48px;
-  }
-  .ew-process-photo-frame {
-    max-width: 300px;
-    aspect-ratio: 4 / 5;
-  }
-  .ew-steps-container {
-    gap: 14px;
-    margin-top: 16px;
-  }
-  .ew-step-card {
-    gap: 14px;
-  }
-  .ew-step-badge {
-    width: 36px;
-    height: 36px;
-    font-size: 1.2rem;
-  }
-  .ew-step-title {
-    font-size: 1.12rem;
-  }
-  .ew-step-desc {
-    font-size: 0.88rem;
-  }
-
-  /* Testimonials */
-  .ew-testimonials-sec {
-    padding-block: 48px;
-  }
-  .ew-testimonial-text-card {
-    padding: 22px 18px;
-    min-height: auto;
-  }
-  .ew-testimonial-quote {
-    font-size: 0.94rem;
-    line-height: 1.58;
-    margin-bottom: 14px;
-  }
-
-  /* FAQ Section */
-  .ew-faq-sec {
-    padding-block: 48px;
-  }
-  .ew-faq-photo-frame {
-    max-width: 300px;
-    aspect-ratio: 4 / 5;
-  }
-  .ew-faq-details-list {
-    margin-top: 16px;
-    gap: 10px;
-  }
-  .ew-faq-summary {
-    padding: 14px 16px;
-    font-size: 1.05rem;
-  }
-  .ew-faq-answer {
-    padding: 0 16px 14px;
-    font-size: 0.88rem;
-  }
-
-  /* Photo Wall Section & Overlay */
+  /* 1. PRE-FOOTER BANNER ("Your story could be next") */
   .ew-photowall-sec {
-    padding-block: 40px;
+    position: relative !important;
+    padding-block: 56px !important;
+    min-height: auto !important;
+    margin-top: 0 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .ew-photowall-sec .ew-marquee-container {
+    position: absolute !important;
+    inset: 0 !important;
+    height: 100% !important;
+    margin-bottom: 0 !important;
+  }
+  .ew-photowall-overlay {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    padding: 0 16px !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 10 !important;
   }
   .ew-photowall-card-text {
-    padding: 24px 16px;
-    margin-inline: 12px;
+    background: rgba(24, 2, 8, 0.94) !important;
+    padding: 32px 22px !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(201, 160, 74, 0.4) !important;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.6) !important;
+    max-width: 440px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
   }
   .ew-photowall-h2 {
-    font-size: clamp(1.8rem, 5.5vw, 2.4rem);
-    margin: 4px 0 8px;
+    font-size: clamp(1.6rem, 5.5vw, 2.1rem) !important;
+    line-height: 1.25 !important;
+    margin: 8px 0 10px !important;
+    color: var(--cream) !important;
   }
   .ew-photowall-p {
-    font-size: 0.92rem;
-    margin-bottom: 18px;
+    font-size: 0.92rem !important;
+    line-height: 1.55 !important;
+    margin: 0 0 20px !important;
+    color: rgba(250, 245, 236, 0.9) !important;
+  }
+  .ew-photowall-book-btn {
+    display: inline-flex !important;
+    padding: 12px 26px !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.12em !important;
   }
 
-  /* Inquiry Form Section */
-  .ew-inquiry-sec {
-    padding-block: 44px;
+  /* 6. CONTACT FORM: Fix Event Date & all input overflows, 2-col wrapping chips */
+  .cgrid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
   }
-  .ew-inquiry-card {
-    padding: 22px 16px;
-    border-radius: 12px;
+  .cinfo {
+    padding: 24px 20px !important;
+    border-radius: 10px !important;
   }
-  .ew-inquiry-title {
-    font-size: clamp(1.6rem, 5vw, 2.1rem);
+  .cform {
+    padding: 24px 18px !important;
+    border-radius: 10px !important;
   }
-  .ew-inquiry-sub {
-    font-size: 0.88rem;
+  .two2 {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
   }
-  .ew-input,
-  .ew-select,
-  .ew-textarea {
-    font-size: 16px; /* Prevents auto-zoom on iOS Safari */
-    padding: 11px 13px;
+  .cform input,
+  .cform textarea,
+  .cform select,
+  .ew-contact-form input,
+  .ew-contact-form textarea,
+  .ew-contact-form select,
+  input[type="date"],
+  input[type="text"],
+  input[type="tel"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    font-size: 16px !important; /* Prevents auto-zoom on iOS */
+    padding: 12px 14px !important;
   }
-  .ew-btn-whatsapp {
-    padding: 13px 20px;
-    font-size: 0.86rem;
-    letter-spacing: 0.1em;
+  /* Service chips in a tidy wrapping 2-column layout */
+  .chips {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .chips button {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    padding: 8px 6px !important;
+    font-size: 0.72rem !important;
+    line-height: 1.3 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 6px !important;
   }
 
-  /* Footer Section */
+  /* 7. FOOTER: Remove duplicate Services list, accordion link groups */
   .ew-footer {
-    padding: 44px 0 24px;
+    padding: 44px 0 24px !important;
   }
   .ew-footer-grid {
-    margin-bottom: 32px;
-    gap: 26px;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    margin-bottom: 28px !important;
   }
-  .ew-footer-heading {
-    font-size: 1.15rem;
-    margin-bottom: 10px;
+  .ew-footer-col-services {
+    display: none !important; /* Remove duplicate Services list on mobile */
+  }
+  .ew-footer-toggle-head {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 12px 0 !important;
+    border-bottom: 1px solid rgba(201, 160, 74, 0.2) !important;
+    margin-bottom: 0 !important;
+    cursor: pointer !important;
+    user-select: none !important;
+  }
+  .ew-footer-acc-icon {
+    display: block !important;
+    font-size: 1.25rem !important;
+    color: var(--gold) !important;
+    font-weight: 400 !important;
+    line-height: 1 !important;
+  }
+  .ew-footer-accordion .ew-footer-links {
+    display: none !important;
+    padding-top: 12px !important;
+    padding-bottom: 8px !important;
+  }
+  .ew-footer-accordion.ew-col-open .ew-footer-links {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
   }
   .ew-footer-bottom {
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-    padding-top: 18px;
+    flex-direction: column !important;
+    gap: 10px !important;
+    text-align: center !important;
+    padding-top: 18px !important;
   }
 
-  /* Floating WhatsApp FAB on Mobile */
+  /* 5. WHATSAPP FLOATING BUTTON */
   .wa {
     width: 48px !important;
     height: 48px !important;
@@ -2131,4 +2265,9 @@ body:has(#door) .wa {
     width: 25px !important;
     height: 25px !important;
   }
+}
+
+@keyframes ewFadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
 }

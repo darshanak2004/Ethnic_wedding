@@ -42,12 +42,12 @@ export default function Hero() {
         {/* Middle: Tilted photo wall strip */}
         <HeroWallStrip />
 
-        {/* Bottom: Two centred CTA buttons */}
+        {/* Bottom: CTA buttons (Desktop: both; Mobile: Contact Us only to avoid duplicate Book Your Date) */}
         <div className="ew-hero-cta-group">
-          <a href="#inquiry" onClick={handleCheckClick} className="ew-btn-gold">
+          <a href="#inquiry" onClick={handleCheckClick} className="ew-btn-gold ew-hero-btn-book">
             Book Your Date
           </a>
-          <Link to="/contact" className="ew-btn-outline">
+          <Link to="/contact" className="ew-btn-outline ew-hero-btn-contact">
             Contact Us
           </Link>
         </div>

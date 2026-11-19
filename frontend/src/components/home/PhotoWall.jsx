@@ -22,8 +22,8 @@ export default function PhotoWall() {
           <p className="ew-photowall-p">
             Let us photograph the moments you will want to relive.
           </p>
-          <a href="#inquiry" onClick={handleCheckClick} className="ew-btn-gold">
-            Check availability
+          <a href="#inquiry" onClick={handleCheckClick} className="ew-btn-gold ew-photowall-book-btn">
+            Book Your Date
           </a>
         </div>
       </div>

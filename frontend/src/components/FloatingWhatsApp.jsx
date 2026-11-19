@@ -1,6 +1,28 @@
+import { useState, useEffect } from "react";
 import { WA } from "../api";
 
 export default function FloatingWhatsApp() {
+  const [hidden, setHidden] = useState(false);
+
+  useEffect(() => {
+    // Hide when any contact/inquiry section or form is in view
+    const targets = document.querySelectorAll(
+      "#inquiry, .ew-inquiry-sec, .cform, .cgrid, #contact-form, .ew-contact-form"
+    );
+    if (!targets.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const isIntersecting = entries.some((e) => e.isIntersecting);
+        setHidden(isIntersecting);
+      },
+      { threshold: 0.08 }
+    );
+
+    targets.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   if (!WA) return null;
 
   const waUrl = `https://wa.me/${WA}?text=${encodeURIComponent(
@@ -9,12 +31,25 @@ export default function FloatingWhatsApp() {
 
   return (
     <a
-      className="wa"
+      className={`wa ${hidden ? "wa-hidden" : ""}`}
       href={waUrl}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
       title="Chat on WhatsApp"
+      style={
+        hidden
+          ? {
+              opacity: 0,
+              visibility: "hidden",
+              pointerEvents: "none",
+              transform: "scale(0.6)",
+              transition: "opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease",
+            }
+          : {
+              transition: "opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease",
+            }
+      }
     >
       <svg
         viewBox="0 0 32 32"
