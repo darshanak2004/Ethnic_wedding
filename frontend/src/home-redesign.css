@@ -332,7 +332,56 @@ body {
 
 @media (max-width: 900px) {
   .ew-desktop-nav {
-    display: none; /* Nav hidden on mobile per spec */
+    display: none; /* Nav hidden on mobile, replaced by mobile-nav-bar below */
+  }
+}
+
+/* Mobile Category Nav Bar — horizontal scrollable pill strip inside the sticky header */
+.ew-mobile-nav-bar {
+  display: none; /* hidden on desktop */
+  background: rgba(38, 5, 15, 0.96);
+  border-top: 1px solid rgba(201, 160, 74, 0.22);
+  padding: 6px 0 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.ew-mobile-nav-bar::-webkit-scrollbar { display: none; }
+
+.ew-mobile-nav-inner {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px;
+  width: max-content;
+}
+
+.ew-mobile-nav-pill {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(201, 160, 74, 0.35);
+  border-radius: 18px;
+  padding: 5px 13px;
+  transition: all 0.2s ease;
+}
+.ew-mobile-nav-pill:active,
+.ew-mobile-nav-pill:hover {
+  background: var(--gold);
+  color: var(--wine);
+  border-color: var(--gold);
+}
+
+@media (max-width: 900px) {
+  .ew-mobile-nav-bar {
+    display: block;
   }
 }
 
@@ -577,21 +626,71 @@ body:has(#door) .wa {
 
 @media (max-width: 768px) {
   .ew-hero-section {
-    padding: 32px 0 80px;
+    padding: 24px 0 54px;
     min-height: auto;
   }
-  .ew-marquee-item {
-    width: 160px;
-    height: 160px;
-    margin-right: 12px;
+  .ew-hero-top {
+    padding-inline: 14px;
+    margin-bottom: 14px !important;
   }
-  /* Smaller height on mobile so the tilted wall doesn't eat the whole hero */
+  .ew-hero-eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    margin-bottom: 6px;
+  }
+  .ew-hero-title {
+    font-size: clamp(23px, 6.2vw, 32px);
+    line-height: 1.18;
+    max-width: 18ch;
+    margin: 4px auto 0 !important;
+  }
+  /* Mobile Hero Photo Wall Strip — Landscape Aspect Ratio */
   .ew-hero-wall-wrap {
-    height: clamp(340px, 58vw, 440px);
+    height: clamp(220px, 32vh, 255px);
+    margin-bottom: 18px;
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  }
+  .ew-hero-wall-wrap .ew-photowall-stage {
+    transform: rotate(-1.5deg) scale(1.02) !important;
+    gap: 10px !important;
+    width: 140vw !important;
+    margin-left: -20vw !important;
   }
   .ew-hero-wall-wrap .ew-photowall-card {
-    width: 160px !important;
-    height: 160px !important;
+    width: 195px !important;
+    height: 118px !important;
+    aspect-ratio: 16 / 10 !important;
+    border-radius: 4px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) !important;
+  }
+  .ew-hero-wall-wrap .ew-photowall-track {
+    gap: 10px !important;
+  }
+  .ew-marquee-item {
+    width: 170px;
+    height: 110px;
+    aspect-ratio: 16 / 10;
+    margin-right: 10px;
+  }
+  .ew-hero-cta-group {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    max-width: 360px;
+    padding-inline: 14px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .ew-hero-cta-group .ew-btn-gold,
+  .ew-hero-cta-group .ew-btn-outline {
+    flex: 1 1 130px;
+    padding: 11px 14px;
+    font-size: 0.74rem;
+    letter-spacing: 0.12em;
+    text-align: center;
+    white-space: nowrap;
   }
 }
 
@@ -674,10 +773,19 @@ body:has(#door) .wa {
 }
 
 @media (max-width: 768px) {
+  .ew-stats-wrapper {
+    margin: -32px auto 0;
+    padding-inline: 16px;
+  }
   .ew-stats-card {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px 0;
-    padding: 24px 16px;
+    gap: 16px 0;
+    padding: 20px 14px;
+    border-radius: 12px;
+  }
+  .ew-stats-num {
+    font-size: 34px;
+    margin-bottom: 4px;
   }
   .ew-stats-cell:nth-child(2) {
     border-left: 1px solid var(--line);
@@ -685,16 +793,16 @@ body:has(#door) .wa {
   .ew-stats-cell:nth-child(3) {
     border-left: none;
     border-top: 1px solid var(--line);
-    padding-top: 16px;
+    padding-top: 14px;
   }
   .ew-stats-cell:nth-child(4) {
     border-left: 1px solid var(--line);
     border-top: 1px solid var(--line);
-    padding-top: 16px;
+    padding-top: 14px;
   }
   .ew-stats-label {
     font-size: 11px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
   }
 }
 
@@ -743,7 +851,7 @@ body:has(#door) .wa {
   z-index: 2;
   width: 100%;
   background: var(--cream);
-  padding-top: 108px;
+  padding-block: clamp(60px, 8vw, 88px);
 }
 
 .ew-arched-photo-frame {
@@ -803,11 +911,10 @@ body:has(#door) .wa {
    ========================================================================== */
 .ew-portfolio-sec {
   position: relative;
-  z-index: 10;
+  z-index: 2;
   width: 100%;
   background: var(--paper);
-  padding-block: 88px;
-  box-shadow: 0 -28px 60px rgba(74, 11, 31, 0.16);
+  padding-block: clamp(60px, 8vw, 88px);
 }
 
 .ew-photo-grid {
@@ -1739,5 +1846,289 @@ body:has(#door) .wa {
 @media (max-width: 600px) {
   .ew-footer-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   14. COMPREHENSIVE MOBILE VIEW POLISH (< 768px)
+   Eliminates all clumsiness: sleek landscape hero, mobile categories bar,
+   balanced typography, touch-friendly buttons, and flawless spacing.
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Header refinements */
+  .ew-header-inner {
+    padding: 8px 14px;
+    gap: 8px;
+  }
+  .ew-logo-img {
+    width: 34px;
+    height: 34px;
+  }
+  .ew-logo-title {
+    font-size: 1.12rem;
+    letter-spacing: 0.05em;
+  }
+  .ew-logo-sub {
+    font-size: 0.56rem;
+    letter-spacing: 0.24em;
+  }
+  .ew-header-action .ew-btn-gold {
+    padding: 8px 13px;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* Section Headings & Spacing */
+  .ew-sec-header {
+    margin-bottom: 28px;
+  }
+  .ew-sec-heading {
+    font-size: clamp(1.8rem, 5.8vw, 2.3rem);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .ew-sec-intro,
+  .ew-sec-body p {
+    font-size: 0.94rem;
+    line-height: 1.6;
+  }
+  .ew-kicker {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    margin-bottom: 6px;
+  }
+  .ew-kicker .ew-ta {
+    font-size: 1.08em;
+  }
+
+  /* Split Sections */
+  .ew-split-sec {
+    padding-block: 48px;
+  }
+  .ew-split-grid {
+    gap: 28px;
+  }
+
+  /* About Section Arched Photo */
+  .ew-arched-photo-frame {
+    max-width: 300px;
+    aspect-ratio: 4 / 5;
+    border-radius: 150px 150px 3px 3px;
+  }
+  .ew-ticks-list {
+    margin-top: 16px;
+    gap: 10px;
+  }
+  .ew-tick-item {
+    font-size: 0.9rem;
+    gap: 10px;
+  }
+
+  /* Portfolio Grid */
+  .ew-portfolio-sec {
+    padding-block: 48px;
+  }
+  .ew-photo-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 140px;
+    gap: 8px;
+  }
+  .ew-portfolio-action {
+    margin-top: 28px;
+  }
+
+  /* Services Cluster & Stack */
+  .ew-services-sec {
+    padding-block: 48px;
+  }
+  .ew-photo-cluster {
+    max-width: 330px;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .ew-services-stack {
+    gap: 14px;
+    margin-top: 14px;
+  }
+  .ew-service-row {
+    gap: 14px;
+    padding-bottom: 12px;
+  }
+  .ew-service-gold-num {
+    font-size: 1.35rem;
+  }
+  .ew-service-heading {
+    font-size: 1.15rem;
+  }
+  .ew-service-text {
+    font-size: 0.88rem;
+  }
+
+  /* Cinematic Films */
+  .ew-films-sec {
+    padding-block: 48px;
+  }
+  .ew-film-player-tile {
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 4px;
+  }
+  .ew-film-play-btn {
+    width: 48px;
+    height: 48px;
+  }
+  .ew-films-thumb-list {
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .ew-film-tab-btn {
+    padding: 8px 10px;
+    gap: 10px;
+  }
+  .ew-film-tab-thumb {
+    width: 72px;
+    height: 48px;
+  }
+  .ew-film-tab-title {
+    font-size: 1.02rem;
+  }
+  .ew-film-tab-loc {
+    font-size: 0.74rem;
+  }
+
+  /* Process Steps */
+  .ew-process-sec {
+    padding-block: 48px;
+  }
+  .ew-process-photo-frame {
+    max-width: 300px;
+    aspect-ratio: 4 / 5;
+  }
+  .ew-steps-container {
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .ew-step-card {
+    gap: 14px;
+  }
+  .ew-step-badge {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+  .ew-step-title {
+    font-size: 1.12rem;
+  }
+  .ew-step-desc {
+    font-size: 0.88rem;
+  }
+
+  /* Testimonials */
+  .ew-testimonials-sec {
+    padding-block: 48px;
+  }
+  .ew-testimonial-text-card {
+    padding: 22px 18px;
+    min-height: auto;
+  }
+  .ew-testimonial-quote {
+    font-size: 0.94rem;
+    line-height: 1.58;
+    margin-bottom: 14px;
+  }
+
+  /* FAQ Section */
+  .ew-faq-sec {
+    padding-block: 48px;
+  }
+  .ew-faq-photo-frame {
+    max-width: 300px;
+    aspect-ratio: 4 / 5;
+  }
+  .ew-faq-details-list {
+    margin-top: 16px;
+    gap: 10px;
+  }
+  .ew-faq-summary {
+    padding: 14px 16px;
+    font-size: 1.05rem;
+  }
+  .ew-faq-answer {
+    padding: 0 16px 14px;
+    font-size: 0.88rem;
+  }
+
+  /* Photo Wall Section & Overlay */
+  .ew-photowall-sec {
+    padding-block: 40px;
+  }
+  .ew-photowall-card-text {
+    padding: 24px 16px;
+    margin-inline: 12px;
+  }
+  .ew-photowall-h2 {
+    font-size: clamp(1.8rem, 5.5vw, 2.4rem);
+    margin: 4px 0 8px;
+  }
+  .ew-photowall-p {
+    font-size: 0.92rem;
+    margin-bottom: 18px;
+  }
+
+  /* Inquiry Form Section */
+  .ew-inquiry-sec {
+    padding-block: 44px;
+  }
+  .ew-inquiry-card {
+    padding: 22px 16px;
+    border-radius: 12px;
+  }
+  .ew-inquiry-title {
+    font-size: clamp(1.6rem, 5vw, 2.1rem);
+  }
+  .ew-inquiry-sub {
+    font-size: 0.88rem;
+  }
+  .ew-input,
+  .ew-select,
+  .ew-textarea {
+    font-size: 16px; /* Prevents auto-zoom on iOS Safari */
+    padding: 11px 13px;
+  }
+  .ew-btn-whatsapp {
+    padding: 13px 20px;
+    font-size: 0.86rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* Footer Section */
+  .ew-footer {
+    padding: 44px 0 24px;
+  }
+  .ew-footer-grid {
+    margin-bottom: 32px;
+    gap: 26px;
+  }
+  .ew-footer-heading {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+  }
+  .ew-footer-bottom {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    padding-top: 18px;
+  }
+
+  /* Floating WhatsApp FAB on Mobile */
+  .wa {
+    width: 48px !important;
+    height: 48px !important;
+    right: 14px !important;
+    bottom: calc(14px + env(safe-area-inset-bottom)) !important;
+  }
+  .wa svg {
+    width: 25px !important;
+    height: 25px !important;
   }
 }

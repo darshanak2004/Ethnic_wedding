@@ -99,6 +99,32 @@ export default function Header() {
           </a>
         </div>
       </div>
+
+      {/* Mobile Category Nav Bar (Smooth horizontal scroll on mobile) */}
+      <nav className="ew-mobile-nav-bar" aria-label="Categories">
+        <div className="ew-mobile-nav-inner">
+          {NAV_LINKS.map((link) =>
+            link.to ? (
+              <Link key={link.id} to={link.to} className="ew-mobile-nav-pill">
+                {link.label}
+              </Link>
+            ) : pathname === "/" ? (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={(e) => handleNavClick(e, link)}
+                className="ew-mobile-nav-pill"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link key={link.id} to={link.fallback} className="ew-mobile-nav-pill">
+                {link.label}
+              </Link>
+            )
+          )}
+        </div>
+      </nav>
     </header>
   );
 }
