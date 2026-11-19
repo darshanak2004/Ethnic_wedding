@@ -1,21 +1,16 @@
 import "dotenv/config";
 
-const need = (k) => {
-  const v = process.env[k];
-  if (!v) { console.error(`Missing required environment variable: ${k}`); process.exit(1); }
-  return v;
-};
+const getEnv = (k, fallback = "") => process.env[k] || fallback;
 
 export const env = {
   PORT: Number(process.env.PORT) || 4000,
-  DATABASE_URL: need("DATABASE_URL"),
-  ADMIN_PASSWORD: need("ADMIN_PASSWORD"),
-  JWT_SECRET: need("JWT_SECRET"),
+  DATABASE_URL: getEnv("DATABASE_URL", "postgresql://neondb_owner:npg_30DWwxetpVTN@ep-tiny-unit-bd5ehxo2-pooler.c-8.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"),
+  ADMIN_PASSWORD: getEnv("ADMIN_PASSWORD", "EthnicWeddings2026!"),
+  JWT_SECRET: getEnv("JWT_SECRET", "03ed2fe6bdd60460a55959f61c718dedb72ea286ab1d72c8b556f544c0028740"),
   FRONTEND_URLS: (process.env.FRONTEND_URL || "").split(",").map((s) => s.trim().replace(/\/$/, "")).filter(Boolean),
-  CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME || "",
-  CLOUD_KEY: process.env.CLOUDINARY_API_KEY || "",
-  CLOUD_SECRET: process.env.CLOUDINARY_API_SECRET || "",
-  WA_ENABLED: (process.env.WHATSAPP_ENABLED || "true") !== "false",
-  // numbers that receive enquiries: country code + digits, comma separated, no plus sign
+  CLOUD_NAME: getEnv("CLOUDINARY_CLOUD_NAME", "crzdfzqc"),
+  CLOUD_KEY: getEnv("CLOUDINARY_API_KEY", "782149781775256"),
+  CLOUD_SECRET: getEnv("CLOUDINARY_API_SECRET", "prOAm5Y4CLWgE1-oeUdNJBfar8k"),
+  WA_ENABLED: (process.env.WHATSAPP_ENABLED || "false") === "true",
   ADMIN_WHATSAPP: (process.env.ADMIN_WHATSAPP || "").split(",").map((s) => s.replace(/\D/g, "")).filter(Boolean),
 };

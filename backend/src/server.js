@@ -57,12 +57,13 @@ async function ensureReady() {
 // Warmup on launch
 ensureReady();
 
-app.use("/api", async (_req, res, next) => {
+app.use(async (_req, res, next) => {
   if (!ready) await ensureReady();
   if (!ready) return res.status(503).json({ error: "Starting up, try again in a moment" });
   next();
 });
 app.use("/api", api);
+app.use(api);
 app.use((_req, res) => res.status(404).json({ error: "Not found" }));
 app.use((err, _req, res, _next) => {
   if (err?.status >= 400 && err.status < 500) return res.status(err.status).json({ error: "Invalid request" });
