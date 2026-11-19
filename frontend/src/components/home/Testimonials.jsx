@@ -42,6 +42,16 @@ export default function Testimonials() {
             </article>
           ))}
         </div>
+
+        {/* Mobile Carousel Swipe Indicator & Hint */}
+        <div className="ew-testimonials-mobile-hint" aria-hidden="true">
+          <span className="ew-swipe-hint-text">← Swipe to read reviews →</span>
+          <div className="ew-swipe-dots">
+            <span className="ew-swipe-dot ew-swipe-dot-active" />
+            <span className="ew-swipe-dot" />
+            <span className="ew-swipe-dot" />
+          </div>
+        </div>
       </div>
     </section>
   );
