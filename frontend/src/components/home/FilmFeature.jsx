@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import SplitSection from "./SplitSection";
+import cldMap from "../../data/cloudinaryMap.json";
 
 const FILMS = [
   {
@@ -7,21 +8,21 @@ const FILMS = [
     title: "Concept Reel",
     loc: "Traditional Ceremony & Reception Highlights",
     time: "3:45",
-    video: "/assets/videos/pravin-archu-trending-reel.mp4",
+    video: cldMap["/assets/videos/pravin-archu-trending-reel.mp4"] || "/assets/videos/pravin-archu-trending-reel.mp4",
   },
   {
     id: 2,
     title: "Wedding Film",
     loc: "Creative Outdoor Cinematic Reel",
     time: "2:58",
-    video: "/assets/videos/manisha-reel-3.mp4",
+    video: cldMap["/assets/videos/manisha-reel-3.mp4"] || "/assets/videos/manisha-reel-3.mp4",
   },
   {
     id: 3,
     title: "Pre Wedding Film",
     loc: "Romantic Scenic Couple Story",
     time: "3:20",
-    video: "/assets/videos/tennyson-reel.mp4",
+    video: cldMap["/assets/videos/tennyson-reel.mp4"] || "/assets/videos/tennyson-reel.mp4",
   },
 ];
 
