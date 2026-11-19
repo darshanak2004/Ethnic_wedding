@@ -54,7 +54,14 @@ body {
 .ew-mobile-hero-grid {
   display: none;
 }
+.ew-mobile-hero-marquee {
+  display: none;
+}
 .ew-testimonials-mobile-hint {
+  display: none;
+}
+/* Gold ticker strip: hidden on desktop, shown mobile-only */
+.ew-gold-ticker-wrap {
   display: none;
 }
 
@@ -623,6 +630,18 @@ body:has(#door) .wa {
   }
 }
 
+/* Mobile hero marquee keyframe */
+@keyframes ewMobileHeroScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Gold text ticker keyframe (footer area, mobile-only) */
+@keyframes ewGoldTickerScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 .ew-marquee-item {
   width: 260px;
   height: 260px;
@@ -655,12 +674,12 @@ body:has(#door) .wa {
 
 @media (max-width: 768px) {
   .ew-hero-section {
-    padding: 24px 0 54px;
+    padding: 24px 0 32px;
     min-height: auto;
   }
   .ew-hero-top {
     padding-inline: 14px;
-    margin-bottom: 14px !important;
+    margin-bottom: 16px !important;
   }
   .ew-hero-eyebrow {
     font-size: 0.68rem;
@@ -673,81 +692,82 @@ body:has(#door) .wa {
     max-width: 18ch;
     margin: 4px auto 0 !important;
   }
-  /* Mobile Hero Photo Wall Strip — HIDDEN on mobile, replaced by 2x2 grid */
+
+  /* 1a. Hide desktop tilted wall strip on mobile */
   .ew-desktop-hero-wall {
     display: none !important;
   }
 
-  /* 3. HERO COLLAGE: Clean 2x2 grid, no tilt, no overlap, equal tiles */
-  .ew-mobile-hero-grid {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 8px !important;
-    width: calc(100% - 28px) !important;
-    max-width: 360px !important;
-    margin: 0 auto 20px !important;
-    padding: 0 !important;
-  }
-  .ew-mobile-hero-tile {
-    aspect-ratio: 4 / 5 !important;
-    border-radius: 6px !important;
-    overflow: hidden !important;
-    background: var(--wine2) !important;
-  }
-  .ew-mobile-hero-img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
+  /* 1b. HERO MARQUEE: single horizontal auto-scrolling row */
+  .ew-mobile-hero-marquee {
     display: block !important;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    /* fade edges */
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  }
+  .ew-mobile-hero-marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 10px;
+    animation: ewMobileHeroScroll 30s linear infinite;
+    will-change: transform;
+  }
+  .ew-mobile-marquee-paused {
+    animation-play-state: paused !important;
+  }
+  .ew-mobile-hero-marquee-tile {
+    flex-shrink: 0;
+    width: calc(140px * 4 / 5); /* 4/5 aspect ratio: width = height * 4/5 */
+    height: 140px;
+    aspect-ratio: 4 / 5;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--wine2);
+    border: 1px solid rgba(201, 160, 74, 0.2);
+  }
+  .ew-mobile-hero-marquee-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
-  /* Legacy wall-wrap rules (kept in case JS still mounts it, but it's hidden) */
+  /* 1c. Hero CTA: show only "Book Your Date", hide the outline "Contact Us" */
+  .ew-hero-cta-group {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-inline: 14px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    gap: 0;
+  }
+  .ew-hero-btn-book {
+    display: inline-flex !important;
+    padding: 12px 32px !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.14em !important;
+  }
+  .ew-hero-btn-contact {
+    display: none !important;
+  }
+
+  /* Legacy wall-wrap (hidden, but keep size rules in case GSAP runs) */
   .ew-hero-wall-wrap {
-    height: clamp(220px, 32vh, 255px);
-    margin-bottom: 18px;
-    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    display: none !important;
   }
-  .ew-hero-wall-wrap .ew-photowall-stage {
-    transform: rotate(-1.5deg) scale(1.02) !important;
-    gap: 10px !important;
-    width: 140vw !important;
-    margin-left: -20vw !important;
-  }
-  .ew-hero-wall-wrap .ew-photowall-card {
-    width: 195px !important;
-    height: 118px !important;
-    aspect-ratio: 16 / 10 !important;
-    border-radius: 4px !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) !important;
-  }
-  .ew-hero-wall-wrap .ew-photowall-track {
-    gap: 10px !important;
+  /* Legacy 2x2 grid — also hidden now that marquee replaces it */
+  .ew-mobile-hero-grid {
+    display: none !important;
   }
   .ew-marquee-item {
     width: 170px;
     height: 110px;
     aspect-ratio: 16 / 10;
     margin-right: 10px;
-  }
-  .ew-hero-cta-group {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    width: 100%;
-    max-width: 360px;
-    padding-inline: 14px;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-  .ew-hero-cta-group .ew-btn-gold,
-  .ew-hero-cta-group .ew-btn-outline {
-    flex: 1 1 130px;
-    padding: 11px 14px;
-    font-size: 0.74rem;
-    letter-spacing: 0.12em;
-    text-align: center;
-    white-space: nowrap;
   }
 }
 
@@ -1703,6 +1723,14 @@ body:has(#door) .wa {
 @media (max-width: 768px) {
   .ew-photowall-sec {
     padding: 50px 0;
+    flex-direction: column;
+  }
+  /* Show gold ticker strip on mobile */
+  .ew-gold-ticker-wrap {
+    display: block !important;
+    position: relative !important;
+    z-index: 11 !important;
+    margin-bottom: 0 !important;
   }
   .ew-photowall-card {
     width: 130px;
@@ -1718,10 +1746,61 @@ body:has(#door) .wa {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ew-photowall-track {
-    animation: none;
-    overflow-x: auto;
+  /* Slow animations way down rather than stopping — keeps elements visible */
+  .ew-marquee-track {
+    animation-duration: 400s !important;
   }
+  .ew-mobile-hero-marquee-track {
+    animation-duration: 120s !important;
+  }
+  .ew-gold-ticker-track {
+    animation-duration: 120s !important;
+  }
+  .ew-photowall-track {
+    animation-duration: 400s !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ew-photowall-track {
+    animation-duration: 400s !important; /* Slow way down but keep visible */
+  }
+}
+
+/* ==========================================================================
+   GOLD TEXT TICKER STRIP (mobile-only, above "Your story could be next" CTA)
+   Hidden on desktop via .ew-gold-ticker-wrap { display: none } above.
+   ========================================================================== */
+/* Desktop base: strip is hidden — overridden in @media (max-width: 768px) */
+.ew-gold-ticker-wrap {
+  display: none;
+  position: relative;
+  z-index: 11;
+  width: 100%;
+  overflow: hidden;
+  background: #1a0208;
+  border-top: 1px solid rgba(201, 160, 74, 0.3);
+  border-bottom: 1px solid rgba(201, 160, 74, 0.3);
+  height: 48px;
+}
+.ew-gold-ticker-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  height: 100%;
+  animation: ewGoldTickerScroll 28s linear infinite;
+  will-change: transform;
+}
+.ew-gold-ticker-item {
+  flex-shrink: 0;
+  padding: 0 20px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
 }
 
 /* ==========================================================================
