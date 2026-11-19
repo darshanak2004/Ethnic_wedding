@@ -37,6 +37,36 @@ export default function useAnimations() {
         const n = +el.dataset.n, s = el.dataset.s || "", o = { v: 0 };
         ScrollTrigger.create({ trigger: el, start: "top 92%", once: true, onEnter: () => gsap.to(o, { v: n, duration: 1.8, ease: "power2.out", onUpdate: () => (el.textContent = Math.round(o.v) + s) }) });
       });
+
+      // Scroll-over curtain effect 1: About Us (#about) pinned while Portfolio Grid (#portfolio) scrolls over
+      const aboutSec = document.querySelector(".ew-about-sec");
+      const portfolioSec = document.querySelector(".ew-portfolio-sec");
+      if (aboutSec && portfolioSec) {
+        ScrollTrigger.create({
+          trigger: aboutSec,
+          start: "top 72px",
+          endTrigger: portfolioSec,
+          end: "top 72px",
+          pin: true,
+          pinSpacing: false,
+          anticipatePin: 1,
+        });
+      }
+
+      // Scroll-over curtain effect 2: Photo Wall Marquee (.ew-photowall-sec) pinned while Inquiry Form (#inquiry) scrolls over
+      const photoWallSec = document.querySelector(".ew-photowall-sec");
+      const inquirySec = document.querySelector(".ew-inquiry-sec");
+      if (photoWallSec && inquirySec) {
+        ScrollTrigger.create({
+          trigger: photoWallSec,
+          start: "top 72px",
+          endTrigger: inquirySec,
+          end: "top 72px",
+          pin: true,
+          pinSpacing: false,
+          anticipatePin: 1,
+        });
+      }
     });
     const r = () => ScrollTrigger.refresh();
     addEventListener("load", r);

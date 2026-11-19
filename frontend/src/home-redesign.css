@@ -478,6 +478,8 @@ body:has(#door) .wa {
 /* Override the section padding so the marquee + overlay work nicely */
 .ew-photowall-sec {
   position: relative;
+  z-index: 2;
+  width: 100%;
   background: #2c0612;
   overflow: hidden;
   /* Extra vertical room so the overlay text card clears the marquee */
@@ -737,6 +739,10 @@ body:has(#door) .wa {
    4. ABOUT SECTION (Arched photo left, text right)
    ========================================================================== */
 .ew-about-sec {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  background: var(--cream);
   padding-top: 108px;
 }
 
@@ -796,8 +802,12 @@ body:has(#door) .wa {
    5. PORTFOLIO (White bg, centred heading, 4-col 210px row height grid)
    ========================================================================== */
 .ew-portfolio-sec {
+  position: relative;
+  z-index: 10;
+  width: 100%;
   background: var(--paper);
   padding-block: 88px;
+  box-shadow: 0 -28px 60px rgba(74, 11, 31, 0.16);
 }
 
 .ew-photo-grid {
@@ -1488,9 +1498,12 @@ body:has(#door) .wa {
    ========================================================================== */
 .ew-inquiry-sec {
   position: relative;
+  z-index: 10;
+  width: 100%;
   background: linear-gradient(160deg, #4a0b1f 0%, #2c0612 100%);
   border-top: 3px solid var(--gold);
   padding-block: clamp(70px, 9vw, 110px);
+  box-shadow: 0 -32px 70px rgba(0, 0, 0, 0.55);
 }
 
 .ew-inquiry-card {
