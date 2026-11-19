@@ -1375,10 +1375,10 @@ body:has(#door) .wa {
 }
 
 .ew-row-normal .ew-photowall-track {
-  animation: ewPhotoWallNormal 80s linear infinite;
+  animation: ewPhotoWallNormal 120s linear infinite;
 }
 .ew-row-reverse .ew-photowall-track {
-  animation: ewPhotoWallReverse 80s linear infinite;
+  animation: ewPhotoWallReverse 120s linear infinite;
 }
 
 @keyframes ewPhotoWallNormal {
