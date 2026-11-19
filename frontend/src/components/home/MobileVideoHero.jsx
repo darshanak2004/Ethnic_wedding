@@ -1,109 +1,89 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 /**
  * MobileVideoHero
  * Full-screen video hero for mobile (max-width: 768px).
  *
- * iOS Safari autoplay rules:
- *   - <video> MUST have `muted` and `playsinline` as actual HTML attributes.
- *   - React's JSX `muted` is unreliable — also set via ref: video.muted = true.
- *   - Call video.play() explicitly after mount and catch rejections.
- *
- * Performance:
- *   - Skips video when navigator.connection.saveData is true (Android only;
- *     iOS Safari doesn't expose this API, so it's safe).
- *   - Pauses when hero scrolls off-screen, resumes when back in view.
- *   - On autoplay rejection: retries once on first touch or scroll.
+ * iOS Safari autoplay requirements:
+ *   - <video> MUST have `muted`, `playsinline`, `webkit-playsinline`, `autoplay`, and `preload="auto"`
+ *   - Both JSX attributes and DOM properties (video.muted = true, setAttribute('playsinline', ''))
+ *   - Video format: H.264 + yuv420p + faststart MP4
+ *   - Fallback: if play() is rejected (e.g. iOS Low Power Mode), poster remains visible
+ *     and we retry playback on the first user interaction (touch/scroll).
+ *   - IntersectionObserver: pause only when hero is completely off-screen, resume when visible.
  */
 export default function MobileVideoHero({ onBookClick }) {
   const videoRef = useRef(null);
-  const retryRef = useRef(false); // tracks whether we've set up the retry listener
-
-  // ── Save-data / slow-connection check ─────────────────────────────────────
-  const shouldSkipVideo = useCallback(() => {
-    try {
-      if (typeof navigator !== "undefined" && navigator.saveData) return true;
-      const conn =
-        navigator.connection ||
-        navigator.mozConnection ||
-        navigator.webkitConnection;
-      if (conn) {
-        if (conn.saveData) return true;
-        if (["slow-2g", "2g"].includes(conn.effectiveType)) return true;
-      }
-    } catch (_) {
-      /* navigator.connection doesn't exist on iOS Safari — that's OK */
-    }
-    return false;
-  }, []);
-
-  // ── Try to play, with retry-on-touch fallback ─────────────────────────────
-  const tryPlay = useCallback(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    // Force attributes that iOS requires
-    video.muted = true;
-    video.setAttribute("playsinline", "");
-    video.setAttribute("muted", "");
-
-    const promise = video.play();
-    if (promise && typeof promise.catch === "function") {
-      promise.catch(() => {
-        // Autoplay was blocked — set up a one-time retry on user interaction
-        if (!retryRef.current) {
-          retryRef.current = true;
-          const retryPlay = () => {
-            video.play().catch(() => {});
-            window.removeEventListener("touchstart", retryPlay, true);
-            window.removeEventListener("scroll", retryPlay, true);
-            window.removeEventListener("click", retryPlay, true);
-          };
-          window.addEventListener("touchstart", retryPlay, { once: true, capture: true, passive: true });
-          window.addEventListener("scroll", retryPlay, { once: true, capture: true, passive: true });
-          window.addEventListener("click", retryPlay, { once: true, capture: true, passive: true });
-        }
-      });
-    }
-  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // If on a slow/data-saver connection, don't load video at all — poster stays
-    if (shouldSkipVideo()) {
-      video.removeAttribute("autoplay");
-      video.querySelectorAll("source").forEach((s) => s.remove());
-      video.load(); // triggers poster display only
-      return;
-    }
-
-    // Force muted + playsinline via DOM (React JSX muted is flaky on iOS)
+    // 1. Force real HTML attributes and properties for iPhone Safari autoplay
+    video.defaultMuted = true;
     video.muted = true;
-    video.setAttribute("playsinline", "");
     video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+    video.setAttribute("autoplay", "");
 
-    // Initial play attempt
-    tryPlay();
+    // 2. Play helper with fallback retry on first user interaction (touch/scroll)
+    let retryAttached = false;
+    const attachRetryListeners = () => {
+      if (retryAttached) return;
+      retryAttached = true;
+      const retryPlay = () => {
+        if (video) {
+          video.play().catch(() => {});
+        }
+        window.removeEventListener("touchstart", retryPlay);
+        window.removeEventListener("touchend", retryPlay);
+        window.removeEventListener("scroll", retryPlay);
+        window.removeEventListener("click", retryPlay);
+      };
+      window.addEventListener("touchstart", retryPlay, { once: true, passive: true });
+      window.addEventListener("touchend", retryPlay, { once: true, passive: true });
+      window.addEventListener("scroll", retryPlay, { once: true, passive: true });
+      window.addEventListener("click", retryPlay, { once: true, passive: true });
+    };
 
-    // IntersectionObserver: pause off-screen, resume on-screen
+    const attemptPlay = () => {
+      // Respect user data saver if explicitly requested
+      if (typeof navigator !== "undefined" && navigator.connection?.saveData) {
+        return;
+      }
+      const promise = video.play();
+      if (promise !== undefined && typeof promise.catch === "function") {
+        promise.catch(() => {
+          // Autoplay blocked by iOS Low Power Mode or browser policy
+          // Keep poster visible and retry on the first user interaction
+          attachRetryListeners();
+        });
+      }
+    };
+
+    // Attempt autoplay immediately
+    attemptPlay();
+
+    // 3. IntersectionObserver: only pause when hero is completely off-screen
     const section = video.closest(".ew-mvh-section") || video;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          tryPlay();
+          attemptPlay();
         } else {
           video.pause();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0 } // fires as soon as any part is visible or fully off-screen
     );
     observer.observe(section);
 
-    return () => observer.disconnect();
-  }, [shouldSkipVideo, tryPlay]);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <section className="ew-mvh-section" aria-label="Ethnic Weddings — Video Hero">
@@ -118,10 +98,11 @@ export default function MobileVideoHero({ onBookClick }) {
           loop
           playsInline
           preload="auto"
-          poster="/assets/hero-poster.jpg"
+          poster="/hero-poster.jpg"
           aria-hidden="true"
         >
-          <source src="/assets/hero-mobile.webm" type="video/webm" />
+          {/* Support both root and assets paths */}
+          <source src="/hero-mobile.mp4" type="video/mp4" />
           <source src="/assets/hero-mobile.mp4" type="video/mp4" />
         </video>
         {/* Gradient overlay: transparent top → dark maroon bottom */}
