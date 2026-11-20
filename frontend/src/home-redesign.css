@@ -723,11 +723,16 @@ body:has(#door) .wa {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 38%;
     display: block;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     /* If video fails / empty, poster fills via the HTML poster attr */
   }
 
-  /* Gradient overlay: transparent top → dark maroon bottom */
+  /* Gradient overlay: clear/crisp over couple → dark maroon at bottom for text */
   .ew-mvh-overlay {
     position: absolute;
     inset: 0;
@@ -735,10 +740,11 @@ body:has(#door) .wa {
     pointer-events: none; /* don't block touch on video */
     background: linear-gradient(
       180deg,
-      transparent 0%,
-      rgba(28, 3, 10, 0.25) 40%,
-      rgba(40, 5, 15, 0.70) 70%,
-      rgba(40, 5, 15, 0.85) 100%
+      rgba(24, 2, 8, 0.15) 0%,
+      transparent 20%,
+      transparent 45%,
+      rgba(38, 4, 14, 0.65) 72%,
+      rgba(38, 4, 14, 0.90) 100%
     );
   }
 
