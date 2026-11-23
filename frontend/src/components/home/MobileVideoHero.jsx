@@ -98,13 +98,13 @@ export default function MobileVideoHero({ onBookClick }) {
           loop
           playsInline
           preload="auto"
-          poster="/hero-poster.jpg?v=2"
+          poster="/hero-poster.jpg?v=3"
           aria-hidden="true"
         >
-          {/* Cache-busted waterfall video paths */}
-          <source src="/hero-mobile-waterfall.mp4" type="video/mp4" />
-          <source src="/hero-mobile.mp4?v=2" type="video/mp4" />
-          <source src="/assets/hero-mobile.mp4?v=2" type="video/mp4" />
+          {/* Outdoor reel video sources */}
+          <source src="/assets/outdoor-reel.mp4?v=3" type="video/mp4" />
+          <source src="/hero-mobile.mp4?v=3" type="video/mp4" />
+          <source src="/assets/hero-mobile.mp4?v=3" type="video/mp4" />
         </video>
         {/* Gradient overlay: transparent top → dark maroon bottom */}
         <div className="ew-mvh-overlay" aria-hidden="true" />
