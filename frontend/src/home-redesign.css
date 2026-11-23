@@ -716,6 +716,7 @@ body:has(#door) .wa {
     position: absolute;
     inset: 0;
     z-index: 1;
+    overflow: hidden;
   }
   .ew-mvh-video {
     position: absolute;
@@ -723,16 +724,18 @@ body:has(#door) .wa {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 38%;
+    object-position: center 40%;
     display: block;
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    image-rendering: -webkit-optimize-contrast;
+    filter: contrast(1.04) saturate(1.06);
     /* If video fails / empty, poster fills via the HTML poster attr */
   }
 
-  /* Gradient overlay: clear/crisp over couple → dark maroon at bottom for text */
+  /* Gradient overlay: crystal clear over couple → dark maroon at bottom for text */
   .ew-mvh-overlay {
     position: absolute;
     inset: 0;
@@ -740,11 +743,11 @@ body:has(#door) .wa {
     pointer-events: none; /* don't block touch on video */
     background: linear-gradient(
       180deg,
-      rgba(24, 2, 8, 0.15) 0%,
-      transparent 20%,
-      transparent 45%,
-      rgba(38, 4, 14, 0.65) 72%,
-      rgba(38, 4, 14, 0.90) 100%
+      rgba(24, 2, 8, 0.08) 0%,
+      transparent 18%,
+      transparent 52%,
+      rgba(38, 4, 14, 0.60) 74%,
+      rgba(38, 4, 14, 0.88) 100%
     );
   }
 
