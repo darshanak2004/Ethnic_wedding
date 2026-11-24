@@ -1,15 +1,30 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import path from "path";
+import { fileURLToPath } from "url";
+import fs from "fs";
 import { env } from "./config.js";
 import { migrate, q } from "./db.js";
 import { api } from "./routes.js";
 import { initWhatsApp } from "./whatsapp.js";
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const distPath = path.resolve(__dirname, "../../frontend/dist");
+const publicPath = path.resolve(__dirname, "../../frontend/public");
+
 const app = express();
-app.set("trust proxy", 1); // Render/Railway/Fly sit behind a proxy, needed for correct per-visitor rate limits
+app.set("trust proxy", 1); // Render/Railway/Fly/GoDaddy sit behind a proxy
 app.disable("x-powered-by");
-app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
+app.use(helmet({ contentSecurityPolicy: false, crossOriginResourcePolicy: { policy: "cross-origin" } }));
+
+// Serve frontend build & static media assets
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+}
+if (fs.existsSync(publicPath)) {
+  app.use(express.static(publicPath));
+}
 
 const isLocal = (origin) => /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin || "");
 const allowed = new Set([...env.FRONTEND_URLS, "http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:5174", "http://127.0.0.1:5174"]);
@@ -20,7 +35,8 @@ app.use(cors({
 }));
 app.use(express.json({ limit: "20kb" }));
 
-// Lightweight healthcheck for uptime monitors and free host keep-alive without burning free Neon DB compute hours
+// Healthcheck endpoints
+app.get("/health", (_req, res) => res.status(200).send("OK"));
 app.get("/api/health", (req, res) => {
   if (req.query.db === "1") {
     return q("SELECT 1")
@@ -54,16 +70,27 @@ async function ensureReady() {
   return initPromise;
 }
 
-// Warmup on launch
-ensureReady();
+// Warmup on launch in background so it doesn't block server start
+ensureReady().catch((e) => console.error("[db] warmup error:", e));
 
-app.use(async (_req, res, next) => {
+app.use("/api", async (_req, res, next) => {
   if (!ready) await ensureReady();
-  if (!ready) return res.status(503).json({ error: "Starting up, try again in a moment" });
+  if (!ready) return res.status(503).json({ error: "Database starting up, try again in a moment" });
   next();
+}, api);
+
+// SPA fallback: send index.html for all page routes
+app.use((req, res, next) => {
+  if (req.method !== "GET" || req.path.startsWith("/api")) {
+    return next();
+  }
+  const indexPath = path.join(distPath, "index.html");
+  if (fs.existsSync(indexPath)) {
+    return res.sendFile(indexPath);
+  }
+  res.status(200).send("Ethnic Weddings App Running");
 });
-app.use("/api", api);
-app.use(api);
+
 app.use((_req, res) => res.status(404).json({ error: "Not found" }));
 app.use((err, _req, res, _next) => {
   if (err?.status >= 400 && err.status < 500) return res.status(err.status).json({ error: "Invalid request" });
@@ -72,7 +99,8 @@ app.use((err, _req, res, _next) => {
 });
 
 if (process.env.NODE_ENV !== "test" && !process.env.VERCEL) {
-  app.listen(env.PORT, () => console.log(`API listening on :${env.PORT}`));
+  const host = "0.0.0.0";
+  app.listen(env.PORT, host, () => console.log(`API and Web App listening on ${host}:${env.PORT}`));
 }
 
 process.on("unhandledRejection", (e) => console.error("[unhandledRejection]", e));

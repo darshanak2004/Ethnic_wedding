@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "cd frontend && npm install && npm run build",
-    "start": "node backend/src/server.js"
+    "dev": "npm run build && node backend/src/server.js",
+    "start": "npm run build && node backend/src/server.js"
   },
   "dependencies": {
     "@whiskeysockets/baileys": "^6.7.18",
