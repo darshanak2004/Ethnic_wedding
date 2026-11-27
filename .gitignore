@@ -10,9 +10,8 @@ node_modules/
 .env.example
 *.env.example
 
-# Build outputs
-dist/
-*/dist/
+# Build outputs (allow frontend/dist for production containers)
+!frontend/dist/
 
 # OS and system files
 .DS_Store
@@ -22,3 +21,7 @@ dist/
 # Large media assets (store separately / deploy via CDN)
 frontend/public/assets/more photos/
 frontend/public/assets/videos/
+frontend/dist/assets/more photos/
+frontend/dist/assets/videos/
+frontend/dist/*.mp4
+frontend/dist/assets/*.mp4
